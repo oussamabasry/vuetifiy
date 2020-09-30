@@ -21,7 +21,7 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar class="cyan darken-4 font-weight-medium mr-0 " dark app>
+        <v-app-bar class="green lighten-5 font-weight-medium mr-0 "  app>
             <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
 
         <router-link to="/" tag="span" style="cursor:pointer">
@@ -36,6 +36,8 @@
             <v-toolbar-items class="hidden-xs-only mr-0 " >
 
                 <v-btn
+                small
+                exact-active-class="active"
                 v-for="item in menuItems"
                 :key="item.title"  text
                 class="btn font-weight-medium"
@@ -83,6 +85,26 @@ export default {
 }
 }
 
+.v-toolbar__items>.v-btn {
+    border-radius: 0;
+    height: 80%!important;
+    max-height: none;
+    margin: auto;
+}
 
+.v-btn:before {
+    border-radius: inherit;
+    bottom: 52px;
+    color: inherit;
+    content: "";
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity .2s cubic-bezier(.4,0,.6,1);
+    background-color: currentColor;
+}
 
 </style>

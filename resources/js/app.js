@@ -9,6 +9,10 @@ import Vue from 'vue'
 import vuetify from './plugins/vuetify' // path to vuetify export
 
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
+
 Vue.component('App', require('./App.vue').default);
 Vue.component('foot', require('./components/foot.vue').default);
 
