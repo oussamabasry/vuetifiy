@@ -6,6 +6,7 @@ import  index from './components/index.vue'
 import  SignInUser from './components/User/SignInUser.vue'
 import  SignUp from './components/User/SignUp.vue'
 import  SignInAdmin from './components/Admin/SignInAdmin.vue'
+import  confirmationEmail from './components/User/confirmationEmail.vue'
 
 
 
@@ -34,6 +35,11 @@ const routes = [
         component:SignInAdmin,
         name:'SignInAdmin'
     },
+    {
+        path:'/confirmation-email',
+        component:confirmationEmail,
+        name:'confirmationEmail'
+    }
 
 
 

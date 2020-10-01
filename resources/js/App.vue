@@ -1,11 +1,11 @@
 <template>
     <v-app id="inspire">
 
-        <v-navigation-drawer absolute left temporary v-model="drawer" app>
+        <v-navigation-drawer relative left temporary v-model="drawer" app>
             <v-list nav dense class="mt-9">
-                <v-list-item-group  active-class="red--text text--accent-4" >
+                <v-list-item-group  active-class="primary--text text--accent-4" >
                     <v-list-item
-                    v-for="item in menuItems"
+                    v-for="item in menuItemsmobile"
                     :key="item.title"
                     router
                     :to="item.link">
@@ -26,7 +26,7 @@
 
         <router-link to="/" tag="span" style="cursor:pointer">
             <v-toolbar-title router >
-                <v-btn text class="btn" >
+                <v-btn text class="btn rounded-xl" color="primary">
                    ENSET Concours
                 </v-btn></v-toolbar-title >
         </router-link>
@@ -37,10 +37,10 @@
 
                 <v-btn
                 small
-                exact-active-class="active"
+                color="primary"
                 v-for="item in menuItems"
                 :key="item.title"  text
-                class="btn font-weight-medium"
+                class="btn rounded-xl p-15"
                 router
                 :to="item.link">
 
@@ -69,7 +69,13 @@ export default {
            menuItems:[
                {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
                {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
-               {icon:'local_police',title:'ADMIN',link:'/sign-in-admin'},
+               {icon:'local_police',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
+           ],
+            menuItemsmobile:[
+               {icon:'home',title:'HOME',link:'/'},
+               {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
+               {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
+               {icon:'local_police',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
            ]
        }
     }
@@ -78,33 +84,24 @@ export default {
 
 <style scoped>
 
+.btn{
+ font-weight: bold;
+
+}
+
  @media screen and (max-width: 720px) and (min-width: 600px) {
   .btn{
   font-size: 11.5px;
-  font-weight: bold;
+
 }
 }
 
+
 .v-toolbar__items>.v-btn {
-    border-radius: 0;
-    height: 80%!important;
+    height: 75%!important;
     max-height: none;
     margin: auto;
 }
 
-.v-btn:before {
-    border-radius: inherit;
-    bottom: 52px;
-    color: inherit;
-    content: "";
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: opacity .2s cubic-bezier(.4,0,.6,1);
-    background-color: currentColor;
-}
 
 </style>

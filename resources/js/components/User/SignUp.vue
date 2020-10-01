@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 offset-sm2>
                 <v-hover v-slot:default="{ hover }" open-delay="200">
                     <v-card
-                        :elevation="hover ? 16 : 2"
+                        :elevation="!hover ? 16 :16"
                         :class="{ 'on-hover': hover }"
                     >
                         <v-card-text class="mt-7">
@@ -22,18 +22,18 @@
                                                     name="firstname"
                                                     label="Prénom"
                                                     id="firstname"
-                                                    v-model="firstname"
+                                                    v-model="form.firstname"
                                                     type="text"
                                                     :error-messages="
                                                         firstnameErrors
                                                     "
                                                     @input="
-                                                        $v.firstname.$touch()
+                                                        $v.form.firstname.$touch()
                                                     "
                                                     @blur="
-                                                        $v.firstname.$touch()
+                                                        $v.form.firstname.$touch()
                                                     "
-                                                    required
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -46,16 +46,16 @@
                                                     name="lastname"
                                                     label="Nom"
                                                     id="lastname"
-                                                    v-model="lastname"
+                                                    v-model="form.lastname"
                                                     type="text"
                                                     :error-messages="
                                                         lastnameErrors
                                                     "
                                                     @input="
-                                                        $v.lastname.$touch()
+                                                        $v.form.lastname.$touch()
                                                     "
-                                                    @blur="$v.lastname.$touch()"
-                                                    required
+                                                    @blur="$v.form.lastname.$touch()"
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -68,14 +68,14 @@
                                                     name="email"
                                                     label="E-mail"
                                                     id="email"
-                                                    v-model="email"
+                                                    v-model="form.email"
                                                     type="email"
                                                     :error-messages="
                                                         emailErrors
                                                     "
-                                                    @input="$v.email.$touch()"
-                                                    @blur="$v.email.$touch()"
-                                                    required
+                                                    @input="$v.form.email.$touch()"
+                                                    @blur="$v.form.email.$touch()"
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -88,18 +88,18 @@
                                                     name="phonenumber"
                                                     label="Téléphone"
                                                     id="phonenumber"
-                                                    v-model="phonenumber"
+                                                    v-model="form.phonenumber"
                                                     type="tel"
                                                     :error-messages="
                                                         phonenumberErrors
                                                     "
                                                     @input="
-                                                        $v.phonenumber.$touch()
+                                                        $v.form.phonenumber.$touch()
                                                     "
                                                     @blur="
-                                                        $v.phonenumber.$touch()
+                                                        $v.form.phonenumber.$touch()
                                                     "
-                                                    required
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -112,10 +112,10 @@
                                                     :items="items"
                                                     label="Diplome"
                                                     menu-props="left "
-                                                    v-model="diplome"
+                                                    v-model="form.diplome"
                                                     :error-messages="diplomeErrors"
-                                                    @input="$v.diplome.$touch()"
-                                                    @blur="$v.diplome.$touch()"
+                                                    @input="$v.form.diplome.$touch()"
+                                                    @blur="$v.form.diplome.$touch()"
                                                 ></v-select>
                                             </v-col>
 
@@ -127,25 +127,18 @@
                                                 <v-menu
                                                     ref="menu"
                                                     v-model="menu"
-                                                    :close-on-content-click="
-                                                        false
-                                                    "
+                                                    :close-on-content-click="false"
                                                     transition="scale-transition"
                                                     offset-y
                                                     min-width="290px"
                                                 >
-                                                    <template
-                                                        v-slot:activator="{
-                                                            on,
-                                                            attrs
-                                                        }"
-                                                    >
+                                                    <template v-slot:activator="{on,attrs}">
                                                         <v-text-field
-                                                            v-model="datebirth"
+                                                            v-model="form.datebirth"
                                                             label="Date de naissance"
                                                             :error-messages="datebirthErrors"
-                                                            @input=" $v.datebirth.$touch()"
-                                                            @blur=" $v.datebirth.$touch()"
+                                                            @input=" $v.form.datebirth.$touch()"
+                                                            @blur=" $v.form.datebirth.$touch()"
                                                             readonly
                                                             v-bind="attrs"
                                                             v-on="on"
@@ -153,10 +146,10 @@
                                                     </template>
                                                     <v-date-picker
                                                         ref="picker"
-                                                        v-model="datebirth"
+                                                        v-model="form.datebirth"
                                                         max="2005-01-01"
                                                         min="1990-01-01"
-                                                       
+                                                        @change="save"
                                                     ></v-date-picker>
                                                 </v-menu>
 
@@ -173,11 +166,11 @@
                                                     label="Mot de passe"
                                                     type="password"
                                                     id="password"
-                                                    v-model="password"
+                                                    v-model="form.password"
                                                     :error-messages="passwordErrors"
-                                                    @input="$v.password.$touch()"
-                                                    @blur="$v.password.$touch()"
-                                                    required
+                                                    @input="$v.form.password.$touch()"
+                                                    @blur="$v.form.password.$touch()"
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -191,11 +184,11 @@
                                                     label="Confimer mot de passe"
                                                     id="confirmpassword"
                                                     type="password"
-                                                    v-model="confirmpassword"
+                                                    v-model="form.confirmpassword"
                                                     :error-messages="confirmpasswordErrors"
-                                                    @input="$v.confirmpassword.$touch()"
-                                                    @blur="$v.confirmpassword.$touch()"
-                                                    required
+                                                    @input="$v.form.confirmpassword.$touch()"
+                                                    @blur="$v.form.confirmpassword.$touch()"
+
 
                                                 ></v-text-field>
                                             </v-col>
@@ -205,10 +198,10 @@
                                                 sm="12"
                                             >
                                                 <v-radio-group
-                                                    v-model="sexe"
+                                                    v-model="form.sexe"
                                                     :error-messages="sexeErrors"
-                                                    @input="$v.sexe.$touch()"
-                                                    @blur="$v.sexe.$touch()"
+                                                    @input="$v.form.sexe.$touch()"
+                                                    @blur="$v.form.sexe.$touch()"
                                                     row
                                                 >
                                                     <v-radio
@@ -236,6 +229,7 @@
                                                     class=""
                                                     type="submit"
                                                     color="primary"
+                                                    :loading="loading"
                                                     >S'inscrire</v-btn
                                                 >
                                             </v-col>
@@ -246,9 +240,18 @@
                                                 sm="6"
                                             >
                                                 <v-container>
+                                                 <v-alert
+                                                 v-if="alert"
+                                                 type="error"
+                                                  class="my-auto"
+                                                 >
+                                                Vous avez déja un compte veillez
+                                                s'identifier s'il vous plait
+                                                </v-alert>
                                                     <p
                                                         class="mx-auto "
                                                         style=" text-align: center;"
+                                                        v-else
                                                     >
                                                         Si vous avez déja un
                                                         compte, vous devez
@@ -258,8 +261,10 @@
                                                             style="cursor:pointer"
                                                         >
                                                             <em
-                                                                style="color:blue;text-align:center"
-                                                                >s'identifier</em
+                                                                style="text-align:center "
+                                                                class="primary--text"
+
+                                                                >s'authentifier</em
                                                             >
                                                         </router-link>
                                                     </p>
@@ -292,153 +297,162 @@ const isPhone = value => /^\+?[0-9]+$/.test(value); //phone valid
 export default {
     data() {
         return {
-            firstname: "",
-            lastname: "",
-            email: "",
-            phonenumber: "",
-            diplome: "",
-            datebirth: "",
-            password: "",
-            confirmpassword: "",
-            sexe: "Femme",
-            items: ["DEUG", "DEUST", "DEUP", "DUT", "BTS", "DTS"],
+
+           form:{
+                   firstname: '',
+                   lastname: '',
+                   email: '',
+                   phonenumber:'',
+                   diplome: '',
+                   datebirth: '',
+                   password: '',
+                   confirmpassword: '',
+                   sexe: "Femme"
+            },
+
+            items: ['DEUG', 'DEUST', 'DEUP', 'DUT', 'BTS', 'DTS'],
             date: new Date().toISOString().substr(0, 10),
             menu: false,
             modal: false,
+            loading: false,
+            submitStatus:null,
+
 
         };
     },
 
     validations: {
-        firstname: {
-            required,
-            maxLength: maxLength(20),
-            minLength: minLength(3)
-        },
-        lastname: {
-            required,
-            maxLength: maxLength(20),
-            minLength: minLength(3)
-        },
-        email: { required, email },
-        phonenumber: {
-            required,
-            maxLength: maxLength(15),
-            minLength: minLength(10),
-            phoneValid: isPhone
-        },
-        diplome: { required },
-        datebirth: { required },
-        password: {
-             required,
-              minLength: minLength(8),  // I assume you'd want something like this too
-             containsUppercase: function(value) {
-               return /[A-Z]/.test(value)
-             },
-             containsLowercase: function(value) {
-               return /[a-z]/.test(value)
-             },
-             containsNumber: function(value) {
-               return /[0-9]/.test(value)
-             },
-             containsSpecial: function(value) {
-               return /[#?!@$%^&*-]/.test(value)
-             }
-         },
 
-    confirmpassword:{
-        required,
-        sameAsPassword: sameAs('password')
-    },
+        form:{
+                   firstname: {
+                       required,
+                       maxLength: maxLength(20),
+                       minLength: minLength(3)
+                   },
+                   lastname: {
+                       required,
+                       maxLength: maxLength(20),
+                       minLength: minLength(3)
+                   },
+                   email: { required, email },
+                   phonenumber: {
+                       required,
+                       maxLength: maxLength(15),
+                       minLength: minLength(10),
+                       phoneValid: isPhone
+                   },
+                   diplome: { required },
+                   datebirth: { required },
+                   password: {
+                        required,
+                         minLength: minLength(8),  // I assume you'd want something like this too
+                        containsUppercase: function(value) {
+                          return /[A-Z]/.test(value)
+                        },
+                        containsLowercase: function(value) {
+                          return /[a-z]/.test(value)
+                        },
+                        containsNumber: function(value) {
+                          return /[0-9]/.test(value)
+                        },
+                        containsSpecial: function(value) {
+                          return /[#?!@$%^&*-]/.test(value)
+                        }
+                    },
 
-    sexe:{
-        required,
-    }
+               confirmpassword:{
+                   required,
+                   sameAsPassword: sameAs('password')
+               },
 
+               sexe:{
+                   required,
+               }
+}
     },
 
     computed: {
         firstnameErrors() {
             const errors = [];
-            if (!this.$v.firstname.$dirty) return errors;
-            !this.$v.firstname.maxLength &&
+            if (!this.$v.form.firstname.$dirty) return errors;
+            !this.$v.form.firstname.maxLength &&
                 errors.push("Le prénom doit comporter au plus 20 caractères");
-            !this.$v.firstname.minLength &&
+            !this.$v.form.firstname.minLength &&
                 errors.push("Le prénom doit comporter au moins 3 caractères");
-            !this.$v.firstname.required && errors.push("Le prénom est requis.");
+            !this.$v.form.firstname.required && errors.push("Le prénom est requis.");
             return errors;
         },
 
         lastnameErrors() {
             const errors = [];
-            if (!this.$v.lastname.$dirty) return errors;
-            !this.$v.lastname.maxLength &&
+            if (!this.$v.form.lastname.$dirty) return errors;
+            !this.$v.form.lastname.maxLength &&
                 errors.push("Le nom doit comporter au plus 20 caractères");
-            !this.$v.lastname.minLength &&
+            !this.$v.form.lastname.minLength &&
                 errors.push("Le nom doit comporter au moins 3 caractères");
-            !this.$v.lastname.required && errors.push("Le nom est requis");
+            !this.$v.form.lastname.required && errors.push("Le nom est requis");
             return errors;
         },
 
         emailErrors() {
             const errors = [];
-            if (!this.$v.email.$dirty) return errors;
-            !this.$v.email.email && errors.push("Doit être un e-mail valide");
-            !this.$v.email.required && errors.push("E-mail est requis");
+            if (!this.$v.form.email.$dirty) return errors;
+            !this.$v.form.email.email && errors.push("Doit être un e-mail valide");
+            !this.$v.form.email.required && errors.push("E-mail est requis");
             return errors;
         },
 
         phonenumberErrors() {
             const errors = [];
-            if (!this.$v.phonenumber.$dirty) return errors;
-            !this.$v.phonenumber.maxLength &&
+            if (!this.$v.form.phonenumber.$dirty) return errors;
+            !this.$v.form.phonenumber.maxLength &&
                 errors.push("Numéro de téléphone invalide");
-            !this.$v.phonenumber.minLength &&
+            !this.$v.form.phonenumber.minLength &&
                 errors.push("Numéro de téléphone invalide");
-            !this.$v.phonenumber.required &&
+            !this.$v.form.phonenumber.required &&
                 errors.push("Numéro de téléphone est requis");
-            !this.$v.phonenumber.phoneValid &&
+            !this.$v.form.phonenumber.phoneValid &&
                 errors.push("Numéro de téléphone invalide");
             return errors;
         },
 
         diplomeErrors() {
             const errors = [];
-            if (!this.$v.diplome.$dirty) return errors;
-            !this.$v.diplome.required && errors.push("Le diplome est requis");
+            if (!this.$v.form.diplome.$dirty) return errors;
+            !this.$v.form.diplome.required && errors.push("Le diplome est requis");
             return errors;
         },
 
         datebirthErrors() {
             const errors = [];
-            if (!this.$v.datebirth.$dirty) return errors;
-            !this.$v.datebirth.required && errors.push("La date de naissance est requis");
+            if (!this.$v.form.datebirth.$dirty) return errors;
+            !this.$v.form.datebirth.required && errors.push("La date de naissance est requis");
             return errors;
         },
       passwordErrors() {
             const errors = [];
-            if (!this.$v.password.$dirty) return errors;
-            !this.$v.password.minLength && errors.push("Le mot de passe doit comporter au moins 8 caractères");
-            !this.$v.password.required && errors.push("Le mot de passe est requis");
-            !this.$v.password.containsUppercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
-            !this.$v.password.containsLowercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
-            !this.$v.password.containsNumber && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
-            !this.$v.password.containsSpecial && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            if (!this.$v.form.password.$dirty) return errors;
+            !this.$v.form.password.minLength && errors.push("Le mot de passe doit comporter au moins 8 caractères");
+            !this.$v.form.password.required && errors.push("Le mot de passe est requis");
+            !this.$v.form.password.containsUppercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsLowercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsNumber && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsSpecial && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
             return errors;
         },
 
         confirmpasswordErrors(){
            const errors = [];
-            if (!this.$v.confirmpassword.$dirty) return errors;
-            !this.$v.confirmpassword.required && errors.push("La confirmation du mot de passe est requis");
-            !this.$v.confirmpassword.sameAsPassword && errors.push("Les mots de passe doivent être identiques");
+            if (!this.$v.form.confirmpassword.$dirty) return errors;
+            !this.$v.form.confirmpassword.required && errors.push("La confirmation du mot de passe est requis");
+            !this.$v.form.confirmpassword.sameAsPassword && errors.push("Les mots de passe doivent être identiques");
             return errors;
         },
 
         sexeErrors(){
              const errors = [];
-            if (!this.$v.sexe.$dirty) return errors;
-            !this.$v.sexe.required && errors.push("Le sexe est requis");
+            if (!this.$v.form.sexe.$dirty) return errors;
+            !this.$v.form.sexe.required && errors.push("Le sexe est requis");
             return errors;
         }
 
@@ -446,12 +460,49 @@ export default {
     },
 
     methods: {
-        onSignup() {
-            this.$store.dispatch("signUserUp", {
-                email: this.email,
-                password: this.password
-            });
+
+        save (date) {
+        this.$refs.menu.save(date)
+      },
+
+        reset(){
+                this.loading=false;
+                this.$v.$reset()
+                this.form.firstname= '';
+                this.form.lastname= '';
+                this.form.email= '';
+                this.form.phonenumber= '';
+                this.form.diplome= '';
+                this.form.datebirth= '';
+                this.form.password= '';
+                this.form.confirmpassword='';
         },
+
+      async  onSignup() {
+
+
+              console.log('submit!')
+              this.$v.$touch()
+              if (this.$v.$invalid) {
+                this.submitStatus = 'ERROR'
+              } else {
+                     this.loading = true
+                     const res = await this.callApi('post','/api/signup',this.form);
+                     this.submitStatus = 'PENDING'
+                     if(res.status==201){
+                        this.submitStatus = 'OK'
+                        this.s('vous vous êtes inscrits avec succès')
+                     }else{
+                         this.submitStatus = 'ERROR API AXIOS'
+                         this.w('Il y a  déja un compte enregistré avec cet e-mail veuillez s\'authentifier s\'il vous plait !!')
+                         this.loading=false;
+                         return
+                    }
+                   setTimeout(this.reset(), 2000)
+
+                    this.$router.push({name:"confirmationEmail"})
+              }
+      },
 
 
     },
