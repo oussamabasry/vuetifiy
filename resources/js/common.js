@@ -26,7 +26,7 @@ export default {
             this.$Notice.info({
                 title: title,
                 desc: desc,
-                duration:10
+                duration:9
             });
 
         },
