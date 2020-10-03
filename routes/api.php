@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/signup','CandidatController@store');
+
+
+
+Route::post('/signup','UserController@store');
+Route::post('/sign-in-user','UserController@login');

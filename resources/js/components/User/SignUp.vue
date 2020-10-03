@@ -240,18 +240,11 @@
                                                 sm="6"
                                             >
                                                 <v-container>
-                                                 <v-alert
-                                                 v-if="alert"
-                                                 type="error"
-                                                  class="my-auto"
-                                                 >
-                                                Vous avez déja un compte veillez
-                                                s'identifier s'il vous plait
-                                                </v-alert>
+
                                                     <p
                                                         class="mx-auto "
                                                         style=" text-align: center;"
-                                                        v-else
+                                                     
                                                     >
                                                         Si vous avez déja un
                                                         compte, vous devez
@@ -465,23 +458,12 @@ export default {
         this.$refs.menu.save(date)
       },
 
-        reset(){
-                this.loading=false;
-                this.$v.$reset()
-                this.form.firstname= '';
-                this.form.lastname= '';
-                this.form.email= '';
-                this.form.phonenumber= '';
-                this.form.diplome= '';
-                this.form.datebirth= '';
-                this.form.password= '';
-                this.form.confirmpassword='';
-        },
+
 
       async  onSignup() {
 
 
-              console.log('submit!')
+
               this.$v.$touch()
               if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
@@ -489,16 +471,24 @@ export default {
                      this.loading = true
                      const res = await this.callApi('post','/api/signup',this.form);
                      this.submitStatus = 'PENDING'
+                     this.loading = false
                      if(res.status==201){
                         this.submitStatus = 'OK'
                         this.s('vous vous êtes inscrits avec succès')
                      }else{
                          this.submitStatus = 'ERROR API AXIOS'
                          this.w('Il y a  déja un compte enregistré avec cet e-mail veuillez s\'authentifier s\'il vous plait !!')
-                         this.loading=false;
                          return
                     }
-                   setTimeout(this.reset(), 2000)
+                   this.$v.$reset()
+                   this.form.firstname= '';
+                   this.form.lastname= '';
+                   this.form.email= '';
+                   this.form.phonenumber= '';
+                   this.form.diplome= '';
+                   this.form.datebirth= '';
+                   this.form.password= '';
+                   this.form.confirmpassword='';
 
                     this.$router.push({name:"confirmationEmail"})
               }

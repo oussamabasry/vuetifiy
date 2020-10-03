@@ -65,6 +65,7 @@
 export default {
     data(){
        return {
+           user:null,
            drawer: false,
            menuItems:[
                {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
@@ -78,6 +79,12 @@ export default {
                {icon:'local_police',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
            ]
        }
+    },
+
+     mounted(){
+          axios.get('/api/user').then((res)=>{
+              this.user=res.data
+          })
     }
 };
 </script>
