@@ -18,8 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->get('/athentificated', function () {
+    return true;
+});
 
 
 
 Route::post('/signup','UserController@store');
 Route::post('/sign-in-user','UserController@login');
+Route::post('/logout','UserController@logout');

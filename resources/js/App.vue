@@ -3,8 +3,9 @@
 
         <v-navigation-drawer relative left temporary v-model="drawer" app>
             <v-list nav dense class="mt-9">
-                <v-list-item-group  active-class="primary--text text--accent-4" >
+                <v-list-item-group  v-if="!islogin" active-class="primary--text text--accent-4" >
                     <v-list-item
+
                     v-for="item in menuItemsmobile"
                     :key="item.title"
                     router
@@ -33,7 +34,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-items class="hidden-xs-only mr-0 " >
+            <v-toolbar-items  class="hidden-xs-only mr-0 " >
 
                 <v-btn
                 small
@@ -51,6 +52,7 @@
 
             </v-toolbar-items>
 
+
         </v-app-bar>
 
         <v-main>
@@ -65,7 +67,8 @@
 export default {
     data(){
        return {
-           user:null,
+           user:{},
+           islogin:false,
            drawer: false,
            menuItems:[
                {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
@@ -81,11 +84,7 @@ export default {
        }
     },
 
-     mounted(){
-          axios.get('/api/user').then((res)=>{
-              this.user=res.data
-          })
-    }
+
 };
 </script>
 

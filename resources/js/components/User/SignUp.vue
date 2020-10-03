@@ -244,7 +244,7 @@
                                                     <p
                                                         class="mx-auto "
                                                         style=" text-align: center;"
-                                                     
+
                                                     >
                                                         Si vous avez déja un
                                                         compte, vous devez
@@ -490,7 +490,7 @@ export default {
                    this.form.password= '';
                    this.form.confirmpassword='';
 
-                    this.$router.push({name:"confirmationEmail"})
+                    this.$router.push({name:'myaccount'})
               }
       },
 

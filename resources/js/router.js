@@ -8,6 +8,7 @@ import  SignUp from './components/User/SignUp.vue'
 import  SignInAdmin from './components/Admin/SignInAdmin.vue'
 import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  myaccount from './components/User/myaccount.vue'
+import Axios from 'axios';
 
 
 
@@ -24,7 +25,14 @@ const routes = [
     {
         path: '/sign-in-user',
         component:SignInUser,
-        name:'SignInUser'
+        name:'SignInUser',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+               return next({name:'myaccount'})
+            }).catch(()=>{
+                next()
+            })
+        }
     },
     {
         path: '/sign-up',
@@ -44,7 +52,14 @@ const routes = [
     {
         path:'/myaccount',
         component:myaccount,
-        name:'myaccount'
+        name:'myaccount',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+                next()
+            }).catch(()=>{
+                return next({name:'SignInUser'})
+            })
+        }
     }
 
 
