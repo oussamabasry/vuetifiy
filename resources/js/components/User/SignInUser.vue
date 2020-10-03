@@ -50,7 +50,7 @@ data(){
 
         showPassword:false,
         invalidData:false,
-         loading: false,
+        loading: false,
     }
 },
 

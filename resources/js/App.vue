@@ -34,7 +34,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-items  class="hidden-xs-only mr-0 " >
+            <v-toolbar-items  v-if="islogin==false" class="hidden-xs-only mr-0 " >
 
                 <v-btn
                 small
@@ -47,6 +47,22 @@
 
                    <v-icon class="mr-2">{{item.icon}}</v-icon>
                    {{item.title}}
+
+                </v-btn>
+
+            </v-toolbar-items>
+            <v-toolbar-items  v-if="islogin==true" class="hidden-xs-only mr-0 " >
+
+                <v-btn
+                small
+                color="primary"
+                text
+                class="btn rounded-xl p-15"
+                @click.prevent="Logout"
+                >
+
+                   <v-icon class="mr-2">lock_open</v-icon>
+                   Logout
 
                 </v-btn>
 
@@ -67,8 +83,8 @@
 export default {
     data(){
        return {
-           user:{},
-           islogin:false,
+           user:null,
+           islogin:true,
            drawer: false,
            menuItems:[
                {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
@@ -84,6 +100,26 @@ export default {
        }
     },
 
+
+
+ mounted(){
+          axios.get('/api/user').then((res)=>{
+              this.islogin=true
+              this.user=res.data
+          }).catch(()=>{
+              this.islogin=false
+          })
+ },
+
+
+    methods:{
+        Logout(){
+             axios.post('/api/logout').then((res)=>{
+                 this.$router.push({name:'SignInUser'})
+                 this.islogin=false
+             })
+        }
+    },
 
 };
 </script>
