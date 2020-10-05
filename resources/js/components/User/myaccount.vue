@@ -1,6 +1,6 @@
 <template>
     <div>
-     <h1 v-if="user!=null">{{user.firstname}}  {{user.lastname}}</h1>
+     <h1 v-if="getUser!=null">{{getUser.firstname}}  {{getUser.lastname}}</h1>
 
     </div>
 </template>
@@ -13,12 +13,14 @@ export default {
         }
     },
 
-
-
-     mounted(){
-          axios.get('/api/user').then((res)=>{
-              this.user=res.data
-          })
+computed:{
+    getUser(){
+        return this.$store.getters.user
     }
+}
+
+
+
+
 }
 </script>

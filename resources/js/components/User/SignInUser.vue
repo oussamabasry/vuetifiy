@@ -4,7 +4,7 @@
         <v-card-title>Connexion Candidat</v-card-title>
         <v-card-text>
           <v-text-field
-          label="E-mail"
+          label="E-mail*"
           prepend-icon="mdi-account-circle"
           v-model="form.email"
           type="email"
@@ -13,7 +13,7 @@
           @blur="$v.form.email.$touch()"
           />
           <v-text-field
-          label="Mot de passe"
+          label="Mot de passe*"
           :type="showPassword ? 'text' : 'password'"
           prepend-icon="mdi-lock"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -90,8 +90,8 @@ methods:{
                            );
                 this.loading=false
                 if(res.status==200){
-
-                             this.s('vous vous êtes connecté avec succès')
+                           this.$store.commit('setUser',res.data)
+                           this.s('vous vous êtes connecté avec succès')
                              this.$router.push({name:"myaccount"});
                              this.$v.$reset()
                              this.email=''

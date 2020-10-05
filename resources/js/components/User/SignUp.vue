@@ -20,7 +20,7 @@
                                             >
                                                 <v-text-field
                                                     name="firstname"
-                                                    label="Prénom"
+                                                    label="Prénom*"
                                                     id="firstname"
                                                     v-model="form.firstname"
                                                     type="text"
@@ -44,7 +44,7 @@
                                             >
                                                 <v-text-field
                                                     name="lastname"
-                                                    label="Nom"
+                                                    label="Nom*"
                                                     id="lastname"
                                                     v-model="form.lastname"
                                                     type="text"
@@ -66,7 +66,7 @@
                                             >
                                                 <v-text-field
                                                     name="email"
-                                                    label="E-mail"
+                                                    label="E-mail*"
                                                     id="email"
                                                     v-model="form.email"
                                                     type="email"
@@ -86,7 +86,7 @@
                                             >
                                                 <v-text-field
                                                     name="phonenumber"
-                                                    label="Téléphone"
+                                                    label="Téléphone*"
                                                     id="phonenumber"
                                                     v-model="form.phonenumber"
                                                     type="tel"
@@ -110,7 +110,7 @@
                                             >
                                                 <v-select
                                                     :items="items"
-                                                    label="Diplome"
+                                                    label="Diplome*"
                                                     menu-props="left "
                                                     v-model="form.diplome"
                                                     :error-messages="diplomeErrors"
@@ -135,7 +135,7 @@
                                                     <template v-slot:activator="{on,attrs}">
                                                         <v-text-field
                                                             v-model="form.datebirth"
-                                                            label="Date de naissance"
+                                                            label="Date de naissance*"
                                                             :error-messages="datebirthErrors"
                                                             @input=" $v.form.datebirth.$touch()"
                                                             @blur=" $v.form.datebirth.$touch()"
@@ -163,7 +163,7 @@
                                             >
                                                 <v-text-field
                                                     name="password"
-                                                    label="Mot de passe"
+                                                    label="Mot de passe*"
                                                     type="password"
                                                     id="password"
                                                     v-model="form.password"
@@ -181,7 +181,7 @@
                                             >
                                                 <v-text-field
                                                     name="confirmpassword"
-                                                    label="Confimer mot de passe"
+                                                    label="Confimer mot de passe*"
                                                     id="confirmpassword"
                                                     type="password"
                                                     v-model="form.confirmpassword"
@@ -308,7 +308,6 @@ export default {
             menu: false,
             modal: false,
             loading: false,
-            submitStatus:null,
 
 
         };
@@ -453,7 +452,6 @@ export default {
     },
 
     methods: {
-
         save (date) {
         this.$refs.menu.save(date)
       },
@@ -462,34 +460,18 @@ export default {
 
       async  onSignup() {
 
-
-
               this.$v.$touch()
-              if (this.$v.$invalid) {
-                this.submitStatus = 'ERROR'
-              } else {
+              if (!this.$v.$invalid) {
                      this.loading = true
                      const res = await this.callApi('post','/api/signup',this.form);
-                     this.submitStatus = 'PENDING'
                      this.loading = false
                      if(res.status==201){
-                        this.submitStatus = 'OK'
                         this.s('vous vous êtes inscrits avec succès')
                      }else{
                          this.submitStatus = 'ERROR API AXIOS'
                          this.w('Il y a  déja un compte enregistré avec cet e-mail veuillez s\'authentifier s\'il vous plait !!')
                          return
                     }
-                   this.$v.$reset()
-                   this.form.firstname= '';
-                   this.form.lastname= '';
-                   this.form.email= '';
-                   this.form.phonenumber= '';
-                   this.form.diplome= '';
-                   this.form.datebirth= '';
-                   this.form.password= '';
-                   this.form.confirmpassword='';
-
                     this.$router.push({name:'myaccount'})
               }
       },

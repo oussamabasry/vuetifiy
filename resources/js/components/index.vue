@@ -11,7 +11,7 @@
     <v-carousel-item
       v-for="(slide, i) in slides"
       :key="i"
-       
+
     >
       <v-sheet
         :color="colors[i]"

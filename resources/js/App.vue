@@ -1,14 +1,13 @@
 <template>
     <v-app id="inspire">
-
+        <loadPage/>
         <v-navigation-drawer relative left temporary v-model="drawer" app>
             <v-list nav dense class="mt-9">
-                <v-list-item-group  v-if="!islogin" active-class="primary--text text--accent-4" >
+                <v-list-item-group v-if="!userIsAuthenticated" active-class="primary--text text--accent-4" >
                     <v-list-item
 
-                    v-for="item in menuItemsmobile"
+                    v-for="item in menuItems"
                     :key="item.title"
-                    router
                     :to="item.link">
 
                         <v-list-item-title >
@@ -17,16 +16,28 @@
                         </v-list-item-title>
 
                     </v-list-item>
-
                 </v-list-item-group>
+                  <v-list-item-group v-else active-class="primary--text text--accent-4" >
+                    <v-list-item
+                    @click.prevent="Logout">
+
+                        <v-list-item-title >
+                             <v-icon class="mr-2">settings_power</v-icon>
+                             Déconnexion
+                        </v-list-item-title>
+
+                    </v-list-item>
+                </v-list-item-group>
+
+
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar class="green lighten-5 font-weight-medium mr-0 "  app>
+        <v-app-bar class="green lighten-5 font-weight-medium mr-0 " height="55%" app>
             <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
 
         <router-link to="/" tag="span" style="cursor:pointer">
-            <v-toolbar-title router >
+            <v-toolbar-title >
                 <v-btn text class="btn rounded-xl" color="primary">
                    ENSET Concours
                 </v-btn></v-toolbar-title >
@@ -34,35 +45,35 @@
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-items  v-if="islogin==false" class="hidden-xs-only mr-0 " >
+            <v-toolbar-items  v-if="!userIsAuthenticated" class="hidden-xs-only mr-0 " >
 
                 <v-btn
                 small
                 color="primary"
                 v-for="item in menuItems"
                 :key="item.title"  text
-                class="btn rounded-xl p-15"
-                router
+                class="btn  "
+
                 :to="item.link">
 
-                   <v-icon class="mr-2">{{item.icon}}</v-icon>
-                   {{item.title}}
+              <!--<v-icon class="mr-2">{{item.icon}}</v-icon>-->
+                   <span>{{item.title}}</span>
 
                 </v-btn>
 
             </v-toolbar-items>
-            <v-toolbar-items  v-if="islogin==true" class="hidden-xs-only mr-0 " >
+             <v-toolbar-items  v-else class="hidden-xs-only mr-0 " >
 
                 <v-btn
                 small
                 color="primary"
                 text
-                class="btn rounded-xl p-15"
+                class="btn  mx-1"
                 @click.prevent="Logout"
                 >
 
-                   <v-icon class="mr-2">lock_open</v-icon>
-                   Logout
+              <!--<v-icon class="mr-2">{{item.icon}}</v-icon>-->
+                   Déconnexion
 
                 </v-btn>
 
@@ -83,40 +94,58 @@
 export default {
     data(){
        return {
-           user:null,
-           islogin:true,
+
            drawer: false,
-           menuItems:[
-               {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
-               {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
-               {icon:'local_police',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
-           ],
-            menuItemsmobile:[
-               {icon:'home',title:'HOME',link:'/'},
-               {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
-               {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
-               {icon:'local_police',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
-           ]
+
        }
     },
+
+computed:{
+   menuItems(){
+        let menuItems
+        if(!this.userIsAuthenticated){
+            menuItems = [
+           {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
+           {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
+           {icon:'admin_panel_settings',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
+        ]
+
+        }
+        else{
+            menuItems=[
+                 {icon:'settings_power',title:'Déconnexion',link:'/sign-up'},
+            ]
+
+        }
+  return menuItems
+    },
+    userIsAuthenticated(){
+      return  this.$store.getters.user !== null && this.$store.getters.user !== undefined 
+    },
+
+},
 
 
 
  mounted(){
-          axios.get('/api/user').then((res)=>{
-              this.islogin=true
-              this.user=res.data
-          }).catch(()=>{
-              this.islogin=false
+
+        axios.get('/api/user').then((res)=>{
+             this.$store.commit('setUser',res.data)
+          }).catch((error)=>{
+
+             this.$store.commit('setUser',null)
           })
+
+
  },
 
 
-    methods:{
+
+ methods:{
         Logout(){
              axios.post('/api/logout').then((res)=>{
-                 this.$router.push({name:'SignInUser'})
-                 this.islogin=false
+                 this.$router.push({name:'index'})
+                 this.$store.commit('setUser',null)
              })
         }
     },
@@ -133,14 +162,14 @@ export default {
 
  @media screen and (max-width: 720px) and (min-width: 600px) {
   .btn{
-  font-size: 11.5px;
+  font-size: 10.6px;
 
 }
 }
 
 
 .v-toolbar__items>.v-btn {
-    height: 75%!important;
+    height: 100%!important;
     max-height: none;
     margin: auto;
 }
