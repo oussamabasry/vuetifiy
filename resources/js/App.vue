@@ -1,8 +1,11 @@
 <template>
     <v-app id="inspire">
         <loadPage/>
+                      <!--Menu Mobile-->
         <v-navigation-drawer relative left temporary v-model="drawer" app>
             <v-list nav dense class="mt-9">
+
+          <!-- Menu when user is not authenticated version mobile-->
                 <v-list-item-group v-if="!userIsAuthenticated" active-class="primary--text text--accent-4" >
                     <v-list-item
 
@@ -17,76 +20,80 @@
 
                     </v-list-item>
                 </v-list-item-group>
-                  <v-list-item-group v-else active-class="primary--text text--accent-4" >
-                    <v-list-item
-                    @click.prevent="Logout">
+           <!-- End Menu when user is not authenticated version mobile-->
 
-                        <v-list-item-title >
+            <!-- Menu when user is authenticated version mobile-->
+                  <v-list-item-group v-else active-class="primary--text text--accent-4" >
+
+                    <v-list-item to="/myaccount">
+                        <v-list-item-title  >
+                             <v-icon class="mr-2">person</v-icon>
+                             Mon compte
+                        </v-list-item-title>
+                    </v-list-item>
+
+                     <v-list-item @click.prevent="Logout" >
+                        <v-list-item-title>
                              <v-icon class="mr-2">settings_power</v-icon>
                              Déconnexion
                         </v-list-item-title>
-
                     </v-list-item>
+            <!-- End Menu when user is authenticated version mobile-->
                 </v-list-item-group>
-
 
             </v-list>
         </v-navigation-drawer>
+                                <!--End Menu Mobile-->
 
-        <v-app-bar class="green lighten-5 font-weight-medium mr-0 " height="55%" app>
+                                <!-- Menu Web-->
+        <v-app-bar class="green lighten-5 font-weight-medium mr-0 " height="52%" app>
             <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
 
-        <router-link to="/" tag="span" style="cursor:pointer">
-            <v-toolbar-title >
+            <router-link to="/" tag="span" style="cursor:pointer">
+               <v-toolbar-title >
                 <v-btn text class="btn rounded-xl" color="primary">
                    ENSET Concours
                 </v-btn></v-toolbar-title >
-        </router-link>
+            </router-link>
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-items  v-if="!userIsAuthenticated" class="hidden-xs-only mr-0 " >
-
-                <v-btn
-                small
-                color="primary"
-                v-for="item in menuItems"
-                :key="item.title"  text
-                class="btn  "
-
-                :to="item.link">
-
-              <!--<v-icon class="mr-2">{{item.icon}}</v-icon>-->
-                   <span>{{item.title}}</span>
-
-                </v-btn>
-
+            <!-- if user is authenticated version web-->
+            <v-toolbar-items   v-if="!userIsAuthenticated" class="hidden-xs-only mr-0 " >
+              <v-btn small color="primary" v-for="item in menuItems" :key="item.title"
+                 text class="btn" width="150px" :to="item.link">
+                 <v-icon class="mr-2">{{item.icon}}</v-icon>
+                 {{item.title}}
+              </v-btn>
             </v-toolbar-items>
+             <!-- End Menu user is authenticated version web-->
+
+             <!-- Menu when user is not authenticated version web-->
              <v-toolbar-items  v-else class="hidden-xs-only mr-0 " >
 
-                <v-btn
-                small
-                color="primary"
-                text
-                class="btn  mx-1"
-                @click.prevent="Logout"
-                >
+                <v-btn small color="primary" text class="btn" width="150px" to="/myaccount">
+                      <v-icon class="mr-2">person</v-icon>
+                       Mon compte
+                </v-btn>
 
-              <!--<v-icon class="mr-2">{{item.icon}}</v-icon>-->
-                   Déconnexion
-
+                <v-btn small color="primary" text class="btn" width="150px" @click.prevent="Logout">
+                      <v-icon class="mr-2">settings_power</v-icon>
+                      Déconnexion
                 </v-btn>
 
             </v-toolbar-items>
-
+            <!-- End Menu when user is not authenticated version web-->
 
         </v-app-bar>
+                             <!-- End Menu Web-->
 
+                             <!--Principal page-->
         <v-main>
 
             <router-view></router-view>
 
         </v-main>
+                          <!--E ndPrincipal page -->
     </v-app>
 </template>
 
@@ -96,35 +103,20 @@ export default {
        return {
 
            drawer: false,
+           menuItems : [
+           {icon:'create',title:'S\'inscrire',link:'/sign-up'},
+           {icon:'lock_open',title:'Connexion',link:'/sign-in-user'},
+           {icon:'admin_panel_settings',title:'Admin',link:'/sign-in-admin'},
+        ]
 
        }
     },
 
 computed:{
-   menuItems(){
-        let menuItems
-        if(!this.userIsAuthenticated){
-            menuItems = [
-           {icon:'create',title:'S\'INSCRIRE',link:'/sign-up'},
-           {icon:'lock_open',title:'CONNEXION',link:'/sign-in-user'},
-           {icon:'admin_panel_settings',title:'ADMINISTRATEUR',link:'/sign-in-admin'},
-        ]
-
-        }
-        else{
-            menuItems=[
-                 {icon:'settings_power',title:'Déconnexion',link:'/sign-up'},
-            ]
-
-        }
-  return menuItems
-    },
     userIsAuthenticated(){
-      return  this.$store.getters.user !== null && this.$store.getters.user !== undefined 
+      return  this.$store.getters.user !== null && this.$store.getters.user !== undefined
     },
-
 },
-
 
 
  mounted(){
@@ -132,13 +124,9 @@ computed:{
         axios.get('/api/user').then((res)=>{
              this.$store.commit('setUser',res.data)
           }).catch((error)=>{
-
              this.$store.commit('setUser',null)
           })
-
-
  },
-
 
 
  methods:{
@@ -172,6 +160,12 @@ computed:{
     height: 100%!important;
     max-height: none;
     margin: auto;
+}
+
+.v-btn {
+
+    text-transform: none;
+
 }
 
 

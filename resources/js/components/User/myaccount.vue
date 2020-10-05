@@ -1,7 +1,8 @@
 <template>
     <div>
      <h1 v-if="getUser!=null">{{getUser.firstname}}  {{getUser.lastname}}</h1>
-
+     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <foot/>
     </div>
 </template>
 

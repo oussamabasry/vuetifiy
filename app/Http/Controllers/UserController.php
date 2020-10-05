@@ -62,7 +62,7 @@ class UserController extends Controller
             'lastname' =>['required','max:20','min:3'],
             'email' =>['required','email','unique:candidats'],
             'phonenumber' =>['required','max:15','min:10'],
-            'diplome' =>['required'],
+            'CNE' =>['required'],
             'datebirth' =>['required','date','before:2005-01-01'],
             'password' =>['required','min:8'],
             'sexe' => ['required']
@@ -72,7 +72,7 @@ class UserController extends Controller
             'lastname' => request('lastname'),
             'email' => request('email'),
             'phonenumber' => request('phonenumber'),
-            'diplome' => request('diplome'),
+            'CNE' => request('CNE'),
             'datebirth' => request('datebirth'),
             'password' => Hash::make(request('password')),
             'sexe' => request('sexe')

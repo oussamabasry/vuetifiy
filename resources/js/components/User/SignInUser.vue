@@ -1,6 +1,6 @@
 <template>
     <div>
-         <v-card width="550" class="mx-auto mt-15">
+         <v-card width="550" class="mx-auto mt-15" :elevation="!hover ? 16 :16">
         <v-card-title>Connexion Candidat</v-card-title>
         <v-card-text>
           <v-text-field
@@ -47,7 +47,7 @@ data(){
             email:'',
             password:'',
         },
-
+        hover:false,
         showPassword:false,
         invalidData:false,
         loading: false,
@@ -91,14 +91,14 @@ methods:{
                 this.loading=false
                 if(res.status==200){
                            this.$store.commit('setUser',res.data)
-                           this.s('vous vous êtes connecté avec succès')
+                          // this.s('vous vous êtes connecté avec succès')
                              this.$router.push({name:"myaccount"});
                              this.$v.$reset()
                              this.email=''
                              this.password=''
                           }else{
                               this.invalidData=true
-                              this.w('La connexion a été échoue !!');
+                             // this.w('La connexion a été échoue !!');
                          }
 
 

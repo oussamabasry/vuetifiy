@@ -108,15 +108,18 @@
                                                 cols="12"
                                                 sm="6"
                                             >
-                                                <v-select
-                                                    :items="items"
-                                                    label="Diplome*"
-                                                    menu-props="left "
-                                                    v-model="form.diplome"
-                                                    :error-messages="diplomeErrors"
-                                                    @input="$v.form.diplome.$touch()"
-                                                    @blur="$v.form.diplome.$touch()"
-                                                ></v-select>
+                                              <v-text-field
+                                                    name="cne"
+                                                    label="CNE*"
+                                                    id="cne"
+                                                    v-model="form.CNE"
+                                                    type="text"
+                                                    :error-messages="CNEErrors"
+                                                    @input="$v.form.CNE.$touch()"
+                                                    @blur="$v.form.CNE.$touch()"
+
+                                                ></v-text-field>
+
                                             </v-col>
 
                                             <v-col
@@ -296,14 +299,13 @@ export default {
                    lastname: '',
                    email: '',
                    phonenumber:'',
-                   diplome: '',
+                   CNE: '',
                    datebirth: '',
                    password: '',
                    confirmpassword: '',
                    sexe: "Femme"
             },
 
-            items: ['DEUG', 'DEUST', 'DEUP', 'DUT', 'BTS', 'DTS'],
             date: new Date().toISOString().substr(0, 10),
             menu: false,
             modal: false,
@@ -333,7 +335,7 @@ export default {
                        minLength: minLength(10),
                        phoneValid: isPhone
                    },
-                   diplome: { required },
+                   CNE: { required },
                    datebirth: { required },
                    password: {
                         required,
@@ -408,10 +410,10 @@ export default {
             return errors;
         },
 
-        diplomeErrors() {
+        CNEErrors() {
             const errors = [];
-            if (!this.$v.form.diplome.$dirty) return errors;
-            !this.$v.form.diplome.required && errors.push("Le diplome est requis");
+            if (!this.$v.form.CNE.$dirty) return errors;
+            !this.$v.form.CNE.required && errors.push("Le diplome est requis");
             return errors;
         },
 

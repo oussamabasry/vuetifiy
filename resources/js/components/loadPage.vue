@@ -39,7 +39,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color:#EAFAF1 ;
+    background-color:white;
     z-index: 999;
   }
   // -----------------------------------------------------

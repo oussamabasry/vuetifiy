@@ -32,17 +32,31 @@ const routes = [
             }).catch(()=>{
                 next()
             })
-        }
+          }
     },
     {
         path: '/sign-up',
         component:SignUp,
-        name:'SignUp'
+        name:'SignUp',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+               return next({name:'myaccount'})
+            }).catch(()=>{
+                next()
+            })
+        }
     },
     {
         path: '/sign-in-admin',
         component:SignInAdmin,
-        name:'SignInAdmin'
+        name:'SignInAdmin',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+               return next({name:'myaccount'})
+            }).catch(()=>{
+                next()
+            })
+        }
     },
     {
         path:'/confirmation-email',

@@ -20,7 +20,7 @@ class User extends Authenticatable
         'lastname',
         'email',
         'phonenumber',
-        'diplome',
+        'CNE',
         'datebirth',
         'password',
         'sexe'
