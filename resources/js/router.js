@@ -8,6 +8,7 @@ import  SignUp from './components/User/SignUp.vue'
 import  SignInAdmin from './components/Admin/SignInAdmin.vue'
 import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  myaccount from './components/User/myaccount.vue'
+import  resetPassword from './components/User/resetPassword.vue'
 import Axios from 'axios';
 
 
@@ -74,7 +75,12 @@ const routes = [
                 return next({name:'SignInUser'})
             })
         }
-    }
+    },
+    {
+        path:'/reset-password',
+        component:resetPassword,
+        name:'resetPassword'
+    },
 
 
 

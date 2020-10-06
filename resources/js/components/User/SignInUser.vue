@@ -23,6 +23,10 @@
           @input="$v.form.password.$touch()"
           @blur="$v.form.password.$touch()"/>
           <p class="red--text" v-if="invalidData"> Email ou mot de passe incorrect !</p>
+          <p>
+          Vous avez oublié votre mot de passe ?
+          <router-link to="/reset-password">cliquez ici</router-link>
+          </p>
         </v-card-text>
 
         <v-divider></v-divider>
