@@ -70,7 +70,9 @@
                                                     id="email"
                                                     v-model="form.email"
                                                     type="email"
-                                                    :error-messages="emailErrors"
+                                                    :error-messages="
+                                                        emailErrors
+                                                    "
                                                     @input="$v.form.email.$touch()"
                                                     @blur="$v.form.email.$touch()"
 
@@ -363,6 +365,93 @@ export default {
 }
     },
 
+    computed: {
+        firstnameErrors() {
+            const errors = [];
+            if (!this.$v.form.firstname.$dirty) return errors;
+            !this.$v.form.firstname.maxLength &&
+                errors.push("Le prénom doit comporter au plus 20 caractères");
+            !this.$v.form.firstname.minLength &&
+                errors.push("Le prénom doit comporter au moins 3 caractères");
+            !this.$v.form.firstname.required && errors.push("Le prénom est requis.");
+            return errors;
+        },
+
+        lastnameErrors() {
+            const errors = [];
+            if (!this.$v.form.lastname.$dirty) return errors;
+            !this.$v.form.lastname.maxLength &&
+                errors.push("Le nom doit comporter au plus 20 caractères");
+            !this.$v.form.lastname.minLength &&
+                errors.push("Le nom doit comporter au moins 3 caractères");
+            !this.$v.form.lastname.required && errors.push("Le nom est requis");
+            return errors;
+        },
+
+        emailErrors() {
+            const errors = [];
+            if (!this.$v.form.email.$dirty) return errors;
+            !this.$v.form.email.email && errors.push("Doit être un e-mail valide");
+            !this.$v.form.email.required && errors.push("E-mail est requis");
+            return errors;
+        },
+
+        phonenumberErrors() {
+            const errors = [];
+            if (!this.$v.form.phonenumber.$dirty) return errors;
+            !this.$v.form.phonenumber.maxLength &&
+                errors.push("Numéro de téléphone invalide");
+            !this.$v.form.phonenumber.minLength &&
+                errors.push("Numéro de téléphone invalide");
+            !this.$v.form.phonenumber.required &&
+                errors.push("Numéro de téléphone est requis");
+            !this.$v.form.phonenumber.phoneValid &&
+                errors.push("Numéro de téléphone invalide");
+            return errors;
+        },
+
+        CNEErrors() {
+            const errors = [];
+            if (!this.$v.form.CNE.$dirty) return errors;
+            !this.$v.form.CNE.required && errors.push("Le diplome est requis");
+            return errors;
+        },
+
+        datebirthErrors() {
+            const errors = [];
+            if (!this.$v.form.datebirth.$dirty) return errors;
+            !this.$v.form.datebirth.required && errors.push("La date de naissance est requis");
+            return errors;
+        },
+      passwordErrors() {
+            const errors = [];
+            if (!this.$v.form.password.$dirty) return errors;
+            !this.$v.form.password.minLength && errors.push("Le mot de passe doit comporter au moins 8 caractères");
+            !this.$v.form.password.required && errors.push("Le mot de passe est requis");
+            !this.$v.form.password.containsUppercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsLowercase && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsNumber && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            !this.$v.form.password.containsSpecial && errors.push("Mot de passe saisie trop faible ! (exemple: RH3@e9rt#A$)");
+            return errors;
+        },
+
+        confirmpasswordErrors(){
+           const errors = [];
+            if (!this.$v.form.confirmpassword.$dirty) return errors;
+            !this.$v.form.confirmpassword.required && errors.push("La confirmation du mot de passe est requis");
+            !this.$v.form.confirmpassword.sameAsPassword && errors.push("Les mots de passe doivent être identiques");
+            return errors;
+        },
+
+        sexeErrors(){
+             const errors = [];
+            if (!this.$v.form.sexe.$dirty) return errors;
+            !this.$v.form.sexe.required && errors.push("Le sexe est requis");
+            return errors;
+        }
+
+
+    },
 
     methods: {
         save (date) {

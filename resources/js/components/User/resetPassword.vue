@@ -11,7 +11,7 @@
       :complete="e6 > 1"
       step="1"
     >
-      Saisir votre E-mail
+      <h4>Saisir votre E-mail</h4><br>
       <small>Afin que nous puissions envoyer un email de vérification</small>
     </v-stepper-step>
 
@@ -48,7 +48,7 @@
       :complete="e6 > 2"
       step="2"
     >
-     Valider le code de vérification
+    <h4>Valider le code de vérification</h4>  <br>
       <small>Vous trouverez ce code dans votre boîte e-mail </small>
     </v-stepper-step>
 
@@ -80,7 +80,9 @@
       :complete="e6 > 3"
       step="3"
     >
-      Changer mot de passe
+    <h4>Changer mot de passe</h4>  <br>
+      <small>Entrer un nouveau mot de passe </small>
+       <br>
     </v-stepper-step>
 
     <v-stepper-content step="3">
