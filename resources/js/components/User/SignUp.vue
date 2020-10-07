@@ -465,7 +465,7 @@ export default {
               this.$v.$touch()
               if (!this.$v.$invalid) {
                      this.loading = true
-                     const res = await this.callApi('post','/api/signup',this.form);
+                     const res = await this.callApi('post','/api/register',this.form);
                      this.loading = false
                      if(res.status==201){
                         this.s('vous vous êtes inscrits avec succès')

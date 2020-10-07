@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/reset', function () {
+    return view('/Mails/forgot');
+});
+
+
 Route::any('{slug}',function(){
     return view('welcome');
   });

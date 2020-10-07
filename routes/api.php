@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/athentificated', function () {
 
 
 
-Route::post('/signup','UserController@store');
+Route::post('/register','UserController@register');
 Route::post('/sign-in-user','UserController@login');
 Route::post('/logout','UserController@logout');
+Route::post('/forgot','ForgotController@forgot');
+Route::post('/reset','ForgotController@reset');

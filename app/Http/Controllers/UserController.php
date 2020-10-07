@@ -16,13 +16,21 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
-
-        if (Auth::attempt($request->only('email','password'))) {
-           return response()->json(Auth::user(), 200);
+        try{
+            if (Auth::attempt($request->only('email','password'))) {
+                return response()->json(Auth::user(), 200);
+             }
+        }catch(\Exception $exception){
+           return response([
+               'message' => $exception->getMessage()
+           ],400);
         }
-        throw ValidationException::withMessages([
-         'email' => ['The provided credentials are incorrect.']
-     ]);
+
+        return response([
+            'message' => 'Invalid email or password'
+        ],401);
+
+
     }
 
     public function logout(){
@@ -54,7 +62,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
 
         request()->validate([
@@ -67,6 +75,7 @@ class UserController extends Controller
             'password' =>['required','min:8'],
             'sexe' => ['required']
         ]);
+
       return User::create([
             'firstname' => request('firstname'),
             'lastname' => request('lastname'),
