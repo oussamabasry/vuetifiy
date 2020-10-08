@@ -77,7 +77,7 @@ class ForgotController extends Controller
 
         return response([
             'message' => 'succes'
-        ]);
+        ],200);
 
     }
 }

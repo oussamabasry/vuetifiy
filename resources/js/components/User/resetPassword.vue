@@ -18,7 +18,7 @@
     <v-stepper-content step="1">
       <v-card
         border="none"
-        class="mb-4"
+        class="mb-5"
         height="70px"
       >
         <v-text-field
@@ -30,15 +30,17 @@
             :error-messages="emailErrors"
             @input="$v.form.email.$touch()"
             @blur="$v.form.email.$touch()"
-            class="mt-1 mx-auto"
+            class="mt-1 mb-0 mx-auto"
             outlined
             clearable
 
           ></v-text-field>
+          <p class="red--text ">{{error}}</p>
       </v-card>
       <v-btn
         color="primary"
         @click.prevent="validationEmail"
+        :loading="loading"
       >
         Continue
       </v-btn>
@@ -48,14 +50,14 @@
       :complete="e6 > 2"
       step="2"
     >
-    <h4>Valider le code de vérification</h4>  <br>
-      <small>Vous trouverez ce code dans votre boîte e-mail </small>
+    <h4> Changer mot de passe</h4>  <br>
+      <small>Valider le code de vérification et entrer un nouveau mot de passe </small>
     </v-stepper-step>
 
     <v-stepper-content step="2">
       <v-card
         class="mb-4"
-        height="70px"
+        height="250px"
       >
         <v-text-field
             v-model="form.token"
@@ -67,30 +69,7 @@
             @input="$v.form.token.$touch()"
             @blur="$v.form.token.$touch()"
           ></v-text-field>
-      </v-card>
-      <v-btn
-        color="primary"
-        @click="validationToken"
-      >
-        Continue
-      </v-btn>
-    </v-stepper-content>
-
-    <v-stepper-step
-      :complete="e6 > 3"
-      step="3"
-    >
-    <h4>Changer mot de passe</h4>  <br>
-      <small>Entrer un nouveau mot de passe </small>
-       <br>
-    </v-stepper-step>
-
-    <v-stepper-content step="3">
-       <v-card
-        class="mb-5"
-        height="150px"
-      >
-        <v-text-field
+           <v-text-field
             v-model="form.password"
             label="Nouveau mot de passe"
             class="mt-1 mx-auto"
@@ -116,14 +95,11 @@
       <v-btn
         color="primary"
         @click="validationPassword"
+        :loading="loading"
       >
-        Changer mot de passe
-      </v-btn>
-      <v-btn text>
-        Cancel
+       Changer mot de passe
       </v-btn>
     </v-stepper-content>
-
 
   </v-stepper>
        </v-col>
@@ -146,6 +122,8 @@ import {required, maxLength, minLength, email, withParams, sameAs} from "vuelida
           confirmpassword:''
         },
         e6: 1,
+        error:null,
+        loading:false
 
       }
     },
@@ -223,30 +201,58 @@ import {required, maxLength, minLength, email, withParams, sameAs} from "vuelida
     },
 
     methods:{
-        validationEmail(){
+
+      async  validationEmail(){
 
               this.$v.form.email.$touch()
              if(!this.$v.form.email.$invalid){
-                 this.e6=2
+
+                  this.loading=true
+                  const res = await this.callApi('post','/api/forgot',{email:this.form.email});
+                   this.loading=false
+                   if( res.status!= 400 && res.status!= 404){
+                      this.e6=2
+                  }else if(res.status===400){
+                     this.e('il y a un probléme veuillez essayer plus tard !!');
+                  }else if(res.status===404){
+                       this.e('cet utilisateur n\'existe pas !!');
+                  }
+
+
              }
         },
 
-        validationToken(){
+        async validationPassword(){
 
               this.$v.form.token.$touch()
-             if(!this.$v.form.token.$invalid){
-                 this.e6=3
+              this.$v.form.password.$touch()
+              this.$v.form.confirmpassword.$touch()
+
+             if(!this.$v.form.token.$invalid && !this.$v.form.password.$invalid && !this.$v.form.confirmpassword.$invalid){
+                 this.loading=true
+
+                  const res = await this.callApi('post','/api/reset',{
+                      token:this.form.token,
+                      password:this.form.password,
+                      confirmpassword:this.form.confirmpassword
+                      });
+
+                    console.log(res)
+
+                   this.loading=false
+                   if( res.status===200){
+                       this.e6=3
+                      this.$router.push({name:'SignInUser'})
+                  }else if(res.status===400){
+                      this.e('Le code de vérification invalide !!');
+                  }else if(res.status===404){
+                      this.error='cet utilisateur n\'existe pas'
+                  }
+
              }
         },
 
-        validationPassword(){
 
-              this.$v.form.password.$touch()
-              this.$v.form.confirmpassword.$touch()
-             if(!this.$v.form.password.$invalid && !this.$v.form.confirmpassword.$invalid){
-                 this.e6=4
-             }
-        }
     }
 
 

@@ -44,11 +44,11 @@ export default {
                 duration:10
             });
         },
-        e (desc,title='Ooops') {
+        e (desc,title='Erreur') {
             this.$Notice.error({
                 title: title,
                 desc: desc,
-                duration:10
+                duration:6
             })
 
 
