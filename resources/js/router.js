@@ -9,6 +9,7 @@ import  SignInAdmin from './components/Admin/SignInAdmin.vue'
 import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  myaccount from './components/User/myaccount.vue'
 import  resetPassword from './components/User/resetPassword.vue'
+import  confirmemail from './components/User/confirmemail.vue'
 import Axios from 'axios';
 
 
@@ -80,6 +81,12 @@ const routes = [
         path:'/reset-password',
         component:resetPassword,
         name:'resetPassword'
+    },
+
+    {
+        path:'/confirm-email',
+        component:confirmemail,
+        name:'confirmemail'
     },
 
 

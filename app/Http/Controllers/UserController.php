@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -16,10 +17,20 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
+
+        $user = DB::table('users')->where('email', $request->email)->first();
+
         try{
-            if (Auth::attempt($request->only('email','password'))) {
-                return response()->json(Auth::user(), 200);
-             }
+            if($user->email_verified_at != null){
+                if (Auth::attempt($request->only('email','password'))) {
+                    return response()->json(Auth::user(), 200);
+                 }
+            }elseif($user->email_verified_at == null){
+               return response([
+                   'message' => 'you must confirm your email'
+               ],403);
+            }
+
         }catch(\Exception $exception){
            return response([
                'message' => $exception->getMessage()

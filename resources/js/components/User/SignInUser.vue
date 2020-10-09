@@ -1,6 +1,6 @@
 <template>
     <div>
-         <v-card width="550" class="mx-auto mt-15" :elevation="!hover ? 16 :16">
+         <v-card width="550" class="mx-auto  mt-15" :elevation="!hover ? 16 :16">
         <v-card-title>Connexion Candidat</v-card-title>
         <v-card-text>
           <v-text-field
@@ -22,10 +22,14 @@
           :error-messages="passwordErrors"
           @input="$v.form.password.$touch()"
           @blur="$v.form.password.$touch()"/>
-          <p class="red--text" v-if="invalidData"> Email ou mot de passe incorrect !</p>
-          <p>
+          <p class="red--text" v-if="invalidData"> {{error}}</p>
+          <p v-if="confirmemail==false">
           Vous avez oublié votre mot de passe ?
           <router-link to="/reset-password">cliquez ici</router-link>
+          </p>
+            <p v-else>
+          Pour confirmer votre email
+          <router-link to="/confirm-email">cliquez ici</router-link>
           </p>
         </v-card-text>
 
@@ -54,7 +58,9 @@ data(){
         hover:false,
         showPassword:false,
         invalidData:false,
+        error:'',
         loading: false,
+        confirmemail:false
     }
 },
 
@@ -95,14 +101,20 @@ methods:{
                 this.loading=false
                 if(res.status==200){
                            this.$store.commit('setUser',res.data)
-                          // this.s('vous vous êtes connecté avec succès')
+                          this.s('vous vous êtes connecté avec succès')
                              this.$router.push({name:"myaccount"});
                              this.$v.$reset()
                              this.email=''
                              this.password=''
+                          }else if(res.status==403){
+                               this.invalidData=true
+                               this.confirmemail=true
+                               this.error='Vous devez confirmer votre email'
                           }else{
                               this.invalidData=true
-                             // this.w('La connexion a été échoue !!');
+                              this.error='Email ou mot de passe incorrect !'
+                              this.confirmemail=false
+                              this.e('La connexion a été échoue !!');
                          }
 
 

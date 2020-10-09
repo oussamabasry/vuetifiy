@@ -469,12 +469,13 @@ export default {
                      this.loading = false
                      if(res.status==201){
                         this.s('vous vous êtes inscrits avec succès')
+                         this.$router.push({name:'confirmemail'})
                      }else{
                          this.submitStatus = 'ERROR API AXIOS'
                          this.w('Il y a  déja un compte enregistré avec cet e-mail veuillez s\'authentifier s\'il vous plait !!')
                          return
                     }
-                    this.$router.push({name:'myaccount'})
+                    
               }
       },
 

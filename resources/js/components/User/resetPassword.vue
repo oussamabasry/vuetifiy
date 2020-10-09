@@ -1,6 +1,11 @@
 <template>
 
 <v-container class="mt-4">
+<v-layout row>
+<v-col class="col-12 col-sm-9 mx-auto">
+<h1 class="blue--text">Récuperation du mot de passe </h1>
+</v-col>
+</v-layout>
    <v-layout row>
        <v-col class="col-12 col-sm-9 mx-auto">
           <v-stepper
