@@ -73,6 +73,7 @@ const routes = [
     },
 
     {
+        
         path:'/confirm-email',
         component:confirmemail,
         name:'confirmemail'

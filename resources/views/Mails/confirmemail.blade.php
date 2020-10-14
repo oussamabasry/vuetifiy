@@ -80,7 +80,7 @@ a{
 
     <div class="footer">
      <p class="coord"><b style="color:#FF3737;">ENSET Councours</b><br>
-        Adresse E-mail: concous.enset@gmail.com <br>
+        Adresse email: concous.enset@gmail.com <br>
         Tél. : 05 23 32 22 20 - 05 23 32 35 30 <br>
         Fax : 05 23 32 25 46 <br>
         Site : <a href="https://www.enset-media.ac.ma/">www.enset-media.ac.ma</a>
