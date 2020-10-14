@@ -1,46 +1,56 @@
 <template>
     <div>
-         <v-card width="550" class="mx-auto  mt-15" :elevation="!hover ? 16 :16">
-        <v-card-title>Connexion Candidat</v-card-title>
+          <v-card width="700" class="rounded-lg mx-auto  mt-lg-15 mt-xl-15 mt-md-15 mt-sm-15 mt-xs-0 mb-xs-0 pa-lg-15 pa-md-15 pa-sm-15  py-15 " :elevation="!hover ? 16 :16">
+
+
+        <v-card-title class="pb-10"> <div class="mx-auto">Connectez-vous</div> </v-card-title>
+
+
+
         <v-card-text>
-          <v-text-field
-          label="E-mail*"
-          prepend-icon="mdi-account-circle"
-          v-model="form.email"
-          type="email"
+           <v-text-field
+            label="E-mail*"
+            v-model="form.email"
+           type="email"
           :error-messages="emailErrors"
           @input="$v.form.email.$touch()"
           @blur="$v.form.email.$touch()"
-          />
-          <v-text-field
-          label="Mot de passe*"
-          :type="showPassword ? 'text' : 'password'"
-          prepend-icon="mdi-lock"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="showPassword = !showPassword"
+            outlined
+            class="ma-xs-0"
+          ></v-text-field>
+
+            <v-text-field
+             label="Mot de passe*"
+           type="password"
           v-model="form.password"
           :error-messages="passwordErrors"
           @input="$v.form.password.$touch()"
-          @blur="$v.form.password.$touch()"/>
+          @blur="$v.form.password.$touch()"
+            outlined
+            ma-xs-0
+          ></v-text-field>
           <p class="red--text" v-if="invalidData"> {{error}}</p>
-          <p v-if="confirmemail==false">
-          Vous avez oublié votre mot de passe ?
-          <router-link to="/reset-password">cliquez ici</router-link>
-          </p>
-            <p v-else>
-          Pour confirmer votre email
-          <router-link to="/confirm-email">cliquez ici</router-link>
-          </p>
         </v-card-text>
 
-        <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="info"
-          width="50%"
-          class="mx-auto"
+          <v-btn color="pink"
+          width="40%"
+          dark
+          rounded
+          class="mx-auto py-6"
           :loading="loading"
           @click.prevent="signin">Connexion</v-btn>
         </v-card-actions>
+        <v-row>
+          <v-col class="colroute">
+          <router-link class="route" v-if="confirmemail==false" to="/reset-password">
+               Mot de passe oublié?
+          </router-link>
+
+          <router-link class="route" v-else to="/confirm-email"> confirmer votre email?</router-link>
+
+          </v-col>
+        </v-row>
       </v-card>
     </div>
 </template>
@@ -110,6 +120,7 @@ methods:{
                                this.invalidData=true
                                this.confirmemail=true
                                this.error='Vous devez confirmer votre email'
+                                this.$router.push({name:"confirmemail"});
                           }else{
                               this.invalidData=true
                               this.error='Email ou mot de passe incorrect !'
@@ -126,5 +137,18 @@ methods:{
 </script>
 
 <style scoped>
+
+.colroute{
+    text-align: end;
+}
+
+.route{
+    color: #2E4053;
+    margin-right: 20px;
+}
+
+.route:hover{
+    color: #E71061 ;
+}
 
 </style>

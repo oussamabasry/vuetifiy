@@ -64,6 +64,7 @@ class ForgotController extends Controller
             return response([
                 'message'=> 'Invalid token !'
             ],400);
+
          }
 
         if(!$user = User::where('email',$passwordResets->email)->first()){

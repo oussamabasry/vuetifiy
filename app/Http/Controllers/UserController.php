@@ -79,7 +79,7 @@ class UserController extends Controller
         request()->validate([
             'firstname' =>['required','max:20','min:3'],
             'lastname' =>['required','max:20','min:3'],
-            'email' =>['required','email','unique:candidats'],
+            'email' =>['required','email','unique:users'],
             'phonenumber' =>['required','max:15','min:10'],
             'CNE' =>['required'],
             'datebirth' =>['required','date','before:2005-01-01'],

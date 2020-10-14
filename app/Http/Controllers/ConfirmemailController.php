@@ -37,7 +37,7 @@ class ConfirmemailController extends Controller
 
             try {
 
-               DB::table('email_confirmations')->insert([
+               DB::table('confirmations')->insert([
                    'email' => $email,
                    'token' => $token,
                ]);
@@ -73,7 +73,7 @@ class ConfirmemailController extends Controller
 
          $token = $request->input('token');
 
-         if(!$emailconfirmation = DB::table('email_confirmations')->where('token',$token)->first()){
+         if(!$emailconfirmation = DB::table('confirmations')->where('token',$token)->first()){
             return response([
                 'message'=> 'Invalid token !'
             ],400);
@@ -84,13 +84,14 @@ class ConfirmemailController extends Controller
                 'message' => 'This user doesnt exist ! '
             ],404);
         }
+        
         $currentDateTime = date('Y-m-d H:i:s');
 
         $affected = DB::table('users')
         ->where('email', $user->email)
         ->update(['email_verified_at' => $currentDateTime]);
 
-       
+
 
         return response([
             'message' => 'succes'

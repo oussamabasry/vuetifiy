@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmailConfirmationsTable extends Migration
+class CreateConfirmationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEmailConfirmationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_confirmations', function (Blueprint $table) {
+        Schema::create('confirmations', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -27,6 +27,6 @@ class CreateEmailConfirmationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_confirmations');
+        Schema::dropIfExists('confirmations');
     }
 }

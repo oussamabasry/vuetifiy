@@ -106,7 +106,6 @@ export default {
            menuItems : [
            {icon:'create',title:'S\'inscrire',link:'/sign-up'},
            {icon:'lock_open',title:'Connexion',link:'/sign-in-user'},
-           {icon:'admin_panel_settings',title:'Admin',link:'/sign-in-admin'},
         ]
 
        }
@@ -148,12 +147,7 @@ computed:{
 
 }
 
- @media screen and (max-width: 720px) and (min-width: 600px) {
-  .btn{
-  font-size: 10.6px;
 
-}
-}
 
 
 .v-toolbar__items>.v-btn {

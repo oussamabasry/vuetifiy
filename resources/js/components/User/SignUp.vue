@@ -7,7 +7,7 @@
                         :elevation="!hover ? 16 :16"
                         :class="{ 'on-hover': hover }"
                     >
-                        <v-card-text class="mt-7">
+                        <v-card-text class="mt-xl-7 mt-lg-7 mt-md-7 mt-sm-7 mt-xs-0">
                             <v-container>
                                 <form @submit.prevent="onSignup">
                                     <h1>Inscription</h1>
@@ -211,14 +211,14 @@
                                                         label="Femme"
                                                         value="Femme"
                                                         name="sexe"
-                                                        color="indigo darken-3"
+                                                        color="black"
                                                         mandatory
                                                     ></v-radio>
                                                     <v-radio
                                                         label="Homme"
                                                         value="Homme"
                                                         name="sexe"
-                                                        color="indigo darken-3"
+                                                        color="black"
                                                     ></v-radio>
                                                 </v-radio-group>
                                             </v-col>
@@ -231,7 +231,9 @@
                                                 <v-btn
                                                     class=""
                                                     type="submit"
-                                                    color="primary"
+                                                    color="pink"
+                                                    dark
+
                                                     :loading="loading"
                                                     >S'inscrire</v-btn
                                                 >
@@ -255,13 +257,9 @@
                                                             to="/sign-in-user"
                                                             tag="span"
                                                             style="cursor:pointer"
+                                                            class="auth"
                                                         >
-                                                            <em
-                                                                style="text-align:center "
-                                                                class="primary--text"
-
-                                                                >s'authentifier</em
-                                                            >
+                                                       <em> s'authentifier</em>
                                                         </router-link>
                                                     </p>
                                                 </v-container>
@@ -475,7 +473,7 @@ export default {
                          this.w('Il y a  déja un compte enregistré avec cet e-mail veuillez s\'authentifier s\'il vous plait !!')
                          return
                     }
-                    
+
               }
       },
 
@@ -501,6 +499,13 @@ export default {
 <style scoped>
 .height {
     max-height: 70px;
+}
+
+.auth{
+    color:#2E4053;
+}
+.auth:hover{
+    color:#E71061;
 }
 
 </style>

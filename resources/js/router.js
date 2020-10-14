@@ -5,7 +5,6 @@ Vue.use(Router);
 import  index from './components/index.vue'
 import  SignInUser from './components/User/SignInUser.vue'
 import  SignUp from './components/User/SignUp.vue'
-import  SignInAdmin from './components/Admin/SignInAdmin.vue'
 import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  myaccount from './components/User/myaccount.vue'
 import  resetPassword from './components/User/resetPassword.vue'
@@ -22,7 +21,8 @@ const routes = [
     {
         path: '/',
         component:index,
-        name:'index'
+        name:'index',
+
     },
     {
         path: '/sign-in-user',
@@ -48,18 +48,7 @@ const routes = [
             })
         }
     },
-    {
-        path: '/sign-in-admin',
-        component:SignInAdmin,
-        name:'SignInAdmin',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
-            }).catch(()=>{
-                next()
-            })
-        }
-    },
+
     {
         path:'/confirmation-email',
         component:confirmationEmail,
@@ -88,6 +77,7 @@ const routes = [
         component:confirmemail,
         name:'confirmemail'
     },
+ 
 
 
 
