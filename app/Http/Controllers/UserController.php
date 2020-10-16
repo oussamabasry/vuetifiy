@@ -21,11 +21,19 @@ class UserController extends Controller
         $user = DB::table('users')->where('email', $request->email)->first();
 
         try{
-            if($user->email_verified_at != null){
+            if($user->email_verified_at != null && $user->role=='user'){
+
                 if (Auth::attempt($request->only('email','password'))) {
                     return response()->json(Auth::user(), 200);
                  }
-            }elseif($user->email_verified_at == null){
+
+            }elseif($user->email_verified_at != null && $user->role=='admin'){
+
+                if (Auth::attempt($request->only('email','password'))) {
+                    return response()->json(Auth::user(), 201);
+                 }
+
+            } elseif($user->email_verified_at == null){
                return response([
                    'message' => 'you must confirm your email'
                ],403);
@@ -84,7 +92,8 @@ class UserController extends Controller
             'CNE' =>['required'],
             'datebirth' =>['required','date','before:2005-01-01'],
             'password' =>['required','min:8'],
-            'sexe' => ['required']
+            'sexe' => ['required'],
+            'role' => ['required'],
         ]);
 
       return User::create([
@@ -95,7 +104,8 @@ class UserController extends Controller
             'CNE' => request('CNE'),
             'datebirth' => request('datebirth'),
             'password' => Hash::make(request('password')),
-            'sexe' => request('sexe')
+            'sexe' => request('sexe'),
+            'role' => request('role')
         ]);
     }
 

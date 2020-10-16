@@ -301,7 +301,8 @@ export default {
                    datebirth: '',
                    password: '',
                    confirmpassword: '',
-                   sexe: "Femme"
+                   sexe: "Femme",
+                   role:'user',
             },
 
             date: new Date().toISOString().substr(0, 10),

@@ -6,9 +6,10 @@ import  index from './components/index.vue'
 import  SignInUser from './components/User/SignInUser.vue'
 import  SignUp from './components/User/SignUp.vue'
 import  confirmationEmail from './components/User/confirmationEmail.vue'
-import  myaccount from './components/User/myaccount.vue'
+import  dashUser from './components/User/dashUser.vue'
 import  resetPassword from './components/User/resetPassword.vue'
 import  confirmemail from './components/User/confirmemail.vue'
+import  dashAdmin from './components/Admin/dashAdmin.vue'
 import Axios from 'axios';
 
 
@@ -55,9 +56,9 @@ const routes = [
         name:'confirmationEmail'
     },
     {
-        path:'/myaccount',
-        component:myaccount,
-        name:'myaccount',
+        path:'/dashUser',
+        component:dashUser,
+        name:'dashUser',
         beforeEnter: (to, from, next) =>{
             axios.get('/api/athentificated').then(()=>{
                 next()
@@ -73,12 +74,26 @@ const routes = [
     },
 
     {
-        
+
         path:'/confirm-email',
         component:confirmemail,
         name:'confirmemail'
     },
- 
+
+    {
+
+        path:'/dash-admin',
+        component:dashAdmin,
+        name:'dashAdmin',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+                next()
+            }).catch(()=>{
+                return next({name:'SignInUser'})
+            })
+        }
+    },
+
 
 
 

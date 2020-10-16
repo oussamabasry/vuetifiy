@@ -23,7 +23,8 @@ class User extends Authenticatable
         'CNE',
         'datebirth',
         'password',
-        'sexe'
+        'sexe',
+        'role'
     ];
 
     /**
@@ -34,6 +35,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function isAdmin() {
+        return $this->role === 'admin';
+     }
+
+     public function isUser() {
+        return $this->role === 'user';
+     }
 
     /**
      * The attributes that should be cast to native types.

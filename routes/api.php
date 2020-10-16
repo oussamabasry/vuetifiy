@@ -22,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/athentificated', function () {
     return true;
 });
 
+Route::middleware('auth:sanctum')->get('/athentificated', function () {
+    return true;
+});
+
 
 
 Route::post('/register','UserController@register');
