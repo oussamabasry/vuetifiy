@@ -112,7 +112,7 @@ methods:{
                 if(res.status==200){
                            this.$store.commit('setUser',res.data)
                            this.s('vous vous êtes connecté avec succès')
-                           this.$router.push({name:"myaccount"});
+                           this.$router.push({name:"dashUser"});
                            this.$v.$reset()
                            this.email=''
                            this.password=''

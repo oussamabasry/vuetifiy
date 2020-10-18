@@ -31,7 +31,7 @@ const routes = [
         name:'SignInUser',
         beforeEnter: (to, from, next) =>{
             axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
+               return next({name:'dashUser'})
             }).catch(()=>{
                 next()
             })
@@ -43,7 +43,7 @@ const routes = [
         name:'SignUp',
         beforeEnter: (to, from, next) =>{
             axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
+               return next({name:'dashUser'})
             }).catch(()=>{
                 next()
             })
