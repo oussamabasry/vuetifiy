@@ -10,6 +10,24 @@ import  dashUser from './components/User/dashUser.vue'
 import  resetPassword from './components/User/resetPassword.vue'
 import  confirmemail from './components/User/confirmemail.vue'
 import  dashAdmin from './components/Admin/dashAdmin.vue'
+import glsidCondidat from './components/Admin/Glsid/glsidCondidat'
+import glsidAccept from './components/Admin/Glsid/glsidAccept'
+import glsidRejected from './components/Admin/Glsid/glsidRejected'
+import bdccCondidat from './components/Admin/Bdcc/bdccCondidat'
+import bdccAccept from './components/Admin/Bdcc/bdccAccept'
+import bdccRejected from './components/Admin/Bdcc/bdccRejected'
+import gilCondidat from './components/Admin/Gil/gilCondidat'
+import gilAccept from './components/Admin/Gil/gilAccept'
+import gilRejected from './components/Admin/Gil/gilRejected'
+import gmsiCondidat from './components/Admin/Gmsi/gmsiCondidat'
+import gmsiAccept from './components/Admin/Gmsi/gmsiAccept'
+import gmsiRejected from './components/Admin/Gmsi/gmsiRejected'
+import seerCondidat from './components/Admin/Seer/seerCondidat'
+import seerAccept from './components/Admin/Seer/seerAccept'
+import seerRejected from './components/Admin/Seer/seerRejected'
+import gecsiCondidat from './components/Admin/Gecsi/gecsiCondidat'
+import gecsiAccept from './components/Admin/Gecsi/gecsiAccept'
+import gecsiRejected from './components/Admin/Gecsi/gecsiRejected'
 import Axios from 'axios';
 
 
@@ -93,6 +111,107 @@ const routes = [
             })
         }
     },
+
+    {
+        path:'/glsid-condidacies',
+        component:glsidCondidat,
+        name:'glsidCondidat'
+    },
+
+    {
+        path:'/glsid-condidacies-accept',
+        component:glsidAccept,
+        name:'glsidAccept'
+    },
+    {
+        path:'/glsid-condidacies-rejected',
+        component:glsidRejected,
+        name:'glsidRejected'
+    },
+
+    {
+        path:'/bdcc-condidacies', 
+        component:bdccCondidat,
+        name:'bdccCondidat'
+    },
+
+    {
+        path:'/bdcc-condidacies-accept',
+        component:bdccAccept,
+        name:'bdccAccept'
+    },
+    {
+        path:'/bdcc-condidacies-rejected',
+        component:bdccRejected,
+        name:'bdccRejected'
+    },
+
+    {
+        path:'/gil-condidacies', 
+        component:gilCondidat,
+        name:'gilCondidat'
+    },
+
+    {
+        path:'/gil-condidacies-accept',
+        component:gilAccept,
+        name:'gilAccept'
+    },
+    {
+        path:'/gil-condidacies-rejected',
+        component:gilRejected,
+        name:'gilRejected'
+    },
+    {
+        path:'/gmsi-condidacies', 
+        component:gmsiCondidat,
+        name:'gmsiCondidat'
+    },
+
+    {
+        path:'/gmsi-condidacies-accept',
+        component:gmsiAccept,
+        name:'gmsiAccept'
+    },
+    {
+        path:'/gmsi-condidacies-rejected',
+        component:gmsiRejected,
+        name:'gmsiRejected'
+    },
+
+    {
+        path:'/seer-condidacies', 
+        component:seerCondidat,
+        name:'seerCondidat'
+    },
+
+    {
+        path:'/seer-condidacies-accept',
+        component:seerAccept,
+        name:'seerAccept'
+    },
+    {
+        path:'/seer-condidacies-rejected',
+        component:seerRejected,
+        name:'seerRejected'
+    },
+    {
+        path:'/gecsi-condidacies', 
+        component:gecsiCondidat,
+        name:'gecsiCondidat'
+    },
+
+    {
+        path:'/gecsi-condidacies-accept',
+        component:gecsiAccept,
+        name:'gecsiAccept'
+    },
+    {
+        path:'/gecsi-condidacies-rejected',
+        component:gecsiRejected,
+        name:'gecsiRejected'
+    },
+
 
 
 
