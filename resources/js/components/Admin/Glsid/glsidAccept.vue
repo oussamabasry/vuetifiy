@@ -108,7 +108,35 @@ export default {
         { text: "Note diplome", value: "note" },
         { text: "Établissement ", value: "school" },
       ],
-      desserts: []
+      desserts: [
+              {
+          name: "Oumaima ABOUTARA",
+          age: 21,
+          note: 18.99,
+          diploma: "DEUST",
+          school: "FSTM",
+        },
+        {
+          name: "Amine RAMI",
+          age: 21,
+          note: 14,
+          diploma: "DEUG",
+          school: "FSBM",
+        },      {
+          name: "Oumaima ABOUTARA",
+          age: 21,
+          note: 18.99,
+          diploma: "DEUST",
+          school: "FSTM",
+        },
+        {
+          name: "Amine RAMI",
+          age: 21,
+          note: 14,
+          diploma: "DEUG",
+          school: "FSBM",
+        },
+      ]
    
     };
   },

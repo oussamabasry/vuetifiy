@@ -40,11 +40,24 @@ class CreateUsersTable extends Migration
             //'phonenumber' => '0648342583',
             //'CNE' => 'R145637383',
             //'datebirth' => '1999-06-23',
-            'email' => 'admin@admin.net',
+            'email' => 'admin@admin.com',
             'email_verified_at' => '2020-10-16 11:44:16',
             'password' => Hash::make('admin'),
             //'sexe' => 'Homme',
             'role' => 'admin'
+        ]);
+
+        DB::table('users')->insert([
+            //'firstname' => 'ADMIN',
+            //'lastname' => 'Mohamed',
+            //'phonenumber' => '0648342583',
+            //'CNE' => 'R145637383',
+            //'datebirth' => '1999-06-23',
+            'email' => 'user@user.com',
+            'email_verified_at' => '2020-10-16 11:44:16',
+            'password' => Hash::make('user'),
+            //'sexe' => 'Homme',
+            'role' => 'user'
         ]);
     }
 

@@ -2,9 +2,9 @@
     <v-app id="inspire">
         <loadPage/>
                       <!--Menu Mobile-->
-       
+    
         <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-else />           <!-- End Menu Web-->
+        <Navbar v-if="userIsAuthenticated" />           <!-- End Menu Web-->
 
                              <!--Principal page-->
         <v-main>
@@ -38,10 +38,15 @@ export default {
        }
     },
 
+
+
 computed:{
     userIsAuthenticated(){
       return  this.$store.getters.user !== null && this.$store.getters.user !== undefined
     },
+     getUser(){
+        return this.$store.getters.user
+    }
 },
 
 
@@ -52,6 +57,7 @@ computed:{
           }).catch((error)=>{
              this.$store.commit('setUser',null)
           })
+
  },
 
 
