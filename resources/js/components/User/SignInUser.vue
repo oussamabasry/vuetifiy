@@ -117,7 +117,7 @@ methods:{
                            this.password=''
                           }else if(res.status==201){
                            this.$store.commit('setUser',res.data)
-                           this.$router.push({name:"glsidCondidat"});
+                           this.$router.push({name:"condidacies"});
                            this.$v.$reset()
                            this.email=''
                            this.password=''

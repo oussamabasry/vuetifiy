@@ -29,6 +29,7 @@ class CreateUserProfilsTable extends Migration
             $table->double('grade_s2', 8, 2);
             $table->double('grade_s3', 8, 2);
             $table->double('grade_s4', 8, 2);
+            $table->double('note', 8, 2);
             $table->string('specialty_bac2');
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')

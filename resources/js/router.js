@@ -28,6 +28,13 @@ import seerRejected from './components/Admin/Seer/seerRejected'
 import gecsiCondidat from './components/Admin/Gecsi/gecsiCondidat'
 import gecsiAccept from './components/Admin/Gecsi/gecsiAccept'
 import gecsiRejected from './components/Admin/Gecsi/gecsiRejected'
+
+
+import condidacies from './components/Admin/condidacies'
+import condidaciesAccepted from './components/Admin/condidaciesAccepted'
+import condidaciesRejected from './components/Admin/condidaciesRejected'
+
+
 import Axios from 'axios';
 
 
@@ -211,6 +218,26 @@ const routes = [
         component:gecsiRejected,
         name:'gecsiRejected'
     },
+
+   /*  associer */
+   {
+    path:'/condidacies', 
+    component:condidacies,
+    name:'condidacies'
+},
+
+{
+    path:'/condidacies-accepted',
+    component:condidaciesAccepted,
+    name:'condidaciesAccepted'
+},
+{
+    path:'/condidacies-rejected',
+    component:condidaciesRejected,
+    name:'condidaciesRejected'
+},
+
+
 
 
 

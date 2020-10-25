@@ -34,10 +34,10 @@ class User extends Authenticatable
     public function adminProfile(){
         return $this->hasOne('App\UserProfil');
     }
-    public function condidacies()
-    {
-        return $this->hasMany('App\Condidacies');
-    }
+    // public function condidacies()
+    // {
+    //     return $this->hasMany('App\Condidacies');
+    // }
 
     /**
      * The attributes that should be hidden for arrays.

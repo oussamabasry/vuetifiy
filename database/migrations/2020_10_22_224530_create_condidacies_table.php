@@ -15,9 +15,18 @@ class CreateCondidaciesTable extends Migration
     {
         Schema::create('condidacies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')
+            //       ->references('id')
+            //       ->on('users')  
+            //       ->onDelete('cascade');
+            $table->unsignedBigInteger('user_profil_id');
+            $table->foreign('user_profil_id')
+                  ->references('id')
+                  ->on('users')  
+                  ->onDelete('cascade');
             $table->string('branch'); //filiere
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('accepted')->nullable();
             $table->timestamps();
         });
     }

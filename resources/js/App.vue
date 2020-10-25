@@ -4,7 +4,7 @@
                       <!--Menu Mobile-->
     
         <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-if="userIsAuthenticated" />           <!-- End Menu Web-->
+        <Navbar v-else />           <!-- End Menu Web-->
 
                              <!--Principal page-->
         <v-main>
