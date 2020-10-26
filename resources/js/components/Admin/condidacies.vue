@@ -206,7 +206,7 @@ export default {
 
       getListCondidaciesFilter() {
         return this.getListCondidacies.filter(function (condidate) {
-          return condidate.accepted === null;
+          return condidate.accepted === null; 
         });
     },
   },

@@ -129,7 +129,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -144,6 +146,11 @@ export default {
   beforeDestroy() {
     clearInterval(this.interval);
   },
+   computed: {
+    ...mapGetters([
+      "drawer"
+    ]),
+   },
 
   mounted() {
     this.interval = setInterval(() => {
@@ -164,11 +171,11 @@ export default {
     changeToGlsid() {
       this.$store.commit(
         "setFullBranch",
-        "Génie du Logiciel et des Systèmes Informatiques Distribués"
-          
+        "Génie du Logiciel et des Systèmes Informatiques Distribués"  
       );
       this.$store.commit("setBranch", "GLSID");
-      this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
     changeToBdcc() {
       this.$store.commit(
@@ -176,12 +183,14 @@ export default {
         "Ingénierie Informatique : Big Data et Cloud Computing"
       );
       this.$store.commit("setBranch", "BDCC");
-       this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
     changeToGil() {
       this.$store.commit("setFullBranch", "Génie Industriel et Logistique");
       this.$store.commit("setBranch", "GIL");
-       this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
     changeToGmsi() {
       this.$store.commit(
@@ -189,7 +198,8 @@ export default {
         "Génie Mécanique des Systèmes Industriels"
       );
       this.$store.commit("setBranch", "GMSI");
-      this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
     changeToSeer() {
       this.$store.commit(
@@ -197,7 +207,8 @@ export default {
         "Systèmes Electriques et Energies Renouvelables"
       );
       this.$store.commit("setBranch", "SEER");
-       this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
     changeToGecsi() {
       this.$store.commit(
@@ -205,7 +216,8 @@ export default {
         "Génie Electrique et Contrôle des Systèmes Industriels"
       );
       this.$store.commit("setBranch", "GECSI");
-       this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies');
+      this.$store.commit("changeDrawer",this.drawer);
     },
 
     Logout() {

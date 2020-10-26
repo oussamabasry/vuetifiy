@@ -6,13 +6,12 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         user: null,
-        drawer: true,
-        listcondidacies: [
-
-        ],
+        drawer:     false,
+        listcondidacies: [],
         fullBranch: 'Génie du Logiciel et des Systèmes Informatiques Distribués',
         branch: 'GLSID'
     },
+
     mutations: {
         setUser(state, payload) {
             state.user = payload

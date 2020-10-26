@@ -14,7 +14,7 @@ class CondidaciesTableSeeder extends Seeder
     {
         $users_profils = App\UserProfil::all();
 
-        factory(App\Condidacies::class,8)->make()->each(function($condidacie) use ($users_profils){
+        factory(App\Condidacies::class,300)->make()->each(function($condidacie) use ($users_profils){
             $condidacie->user_profil_id =$users_profils->random()->id;
             $condidacie->save();
         });
