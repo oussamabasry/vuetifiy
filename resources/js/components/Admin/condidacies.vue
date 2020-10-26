@@ -1,5 +1,8 @@
 <template>
   <v-layout row class="ma-10">
+  
+     <v-app-bar-nav-icon class="mb-3" @click.stop="drawing"></v-app-bar-nav-icon>
+    
     <v-flex md12>
       <v-app style="background-color: white" class="ma-n4 ml-2">
         <v-container>
@@ -192,15 +195,19 @@ export default {
       this.dialog = !this.dialog;
     },
 
+    drawing(){
+      this.$store.commit("changeDrawer",this.drawer);
+    }
+
   },
 
-  computed: {
-    ...mapGetters(["getListCondidacies", "getFullBranch"]),
+    computed: {
+      ...mapGetters(["getListCondidacies", "getFullBranch","drawer"]),
 
-    getListCondidaciesFilter() {
-      return this.getListCondidacies.filter(function (condidate) {
-        return condidate.accepted === null;
-      });
+      getListCondidaciesFilter() {
+        return this.getListCondidacies.filter(function (condidate) {
+          return condidate.accepted === null;
+        });
     },
   },
 };

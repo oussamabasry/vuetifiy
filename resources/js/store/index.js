@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
             state.user = payload
         },
         changeDrawer(state, payload) {
-            state.drawer = payload
+            state.drawer = !payload
         },
         setBranch(state, payload) {
             state.branch = payload

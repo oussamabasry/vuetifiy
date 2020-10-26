@@ -9,7 +9,7 @@ import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  dashUser from './components/User/dashUser.vue'
 import  resetPassword from './components/User/resetPassword.vue'
 import  confirmemail from './components/User/confirmemail.vue'
-import  dashAdmin from './components/Admin/dashAdmin.vue'
+
 
 
 
@@ -88,19 +88,7 @@ const routes = [
         name:'confirmemail'
     },
 
-    {
 
-        path:'/dash-admin',
-        component:dashAdmin,
-        name:'dashAdmin',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                next()
-            }).catch(()=>{
-                return next({name:'SignInUser'})
-            })
-        }
-    },
 
 
    /*  associer */

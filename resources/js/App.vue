@@ -4,7 +4,7 @@
                       <!--Menu Mobile-->
     
         <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-else />           <!-- End Menu Web-->
+        <Navbar v-if="userIsAuthenticated && drawer" />           <!-- End Menu Web-->
 
                              <!--Principal page-->
         <v-main>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Navbar from './components/Navbar'
 import Navhome from './components/Navhome'
 
@@ -28,8 +29,6 @@ export default {
     },
     data(){
        return {
-
-           drawer: false,
            menuItems : [
            {icon:'create',title:'S\'inscrire',link:'/sign-up'},
            {icon:'lock_open',title:'Connexion',link:'/sign-in-user'},
@@ -41,6 +40,7 @@ export default {
 
 
 computed:{
+     ...mapGetters(["drawer"]),
     userIsAuthenticated(){
       return  this.$store.getters.user !== null && this.$store.getters.user !== undefined
     },

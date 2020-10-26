@@ -1,5 +1,7 @@
 <template>
   <v-layout row class="ma-10">
+    <v-app-bar-nav-icon class="mb-3" @click.stop="drawing"></v-app-bar-nav-icon>
+
     <v-flex md12>
       <v-app style="background-color: white" class="ma-n4 ml-2">
         <v-container>
@@ -56,12 +58,95 @@
             item-key="name"
             show-select
             class="elevation-1"
+            @click:row="handleRowClick"
           >
             <template v-slot:top> </template>
           </v-data-table>
         </v-container>
       </v-app>
     </v-flex>
+
+ <v-row justify="center" v-if="item != null">
+      <v-dialog v-model="dialog" width="600px">
+        <v-card>
+          <v-card-title class="cyan darken-1">
+            <span class="headline white--text">Dossier de candidature</span>
+          </v-card-title>
+
+          <v-list class="mt-7">
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>account_circle</v-icon>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title class="mx-auto">
+                  {{ item.firstname }} {{ item.lastname }} , {{ item.age }} ans
+                  , {{ item.sexe }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-email</v-icon>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title> {{ item.CNE }} </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>school</v-icon>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ item.diploma }}, {{ item.specialty_bac2 }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-phone</v-icon>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title> {{ item.phonenumber }} </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+          </v-list>
+
+          <div class="pa-4">
+            <v-chip-group color="primary" active-class="primary--text" column>
+              <v-chip class="mr-2"> S1: {{ item.grade_s1 }} </v-chip>
+              <v-chip class="mx-2"> S2: {{ item.grade_s2 }} </v-chip>
+              <v-chip class="mx-2"> S3: {{ item.grade_s3 }} </v-chip>
+              <v-chip class="mx-2"> S4: {{ item.grade_s4 }} </v-chip>
+              <v-chip class="mx-2"> Diplome: {{ item.note }} </v-chip>
+            </v-chip-group>
+          </div>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false"> Fermer </v-btn>
+            <v-btn @click="refuse(item.id)" color="error"> Refuser </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+
   </v-layout>
 </template>
 
@@ -72,6 +157,8 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      item: null,
+      dialog: false,
       singleSelect: false,
       selected: [],
       headers: [
@@ -95,11 +182,32 @@ export default {
     };
   },
 
+methods:{
+   
+      ...mapActions([
+      'upDateCondidacies',
+      'refuseCondidacie'
+      
+    ]),
+
+    handleRowClick(item) {
+      this.dialog = !this.dialog;
+      this.item = item;
+    },
+    refuse(idCondidacie) {
+       this.refuseCondidacie(idCondidacie)
+      this.dialog = !this.dialog;
+    },
+    drawing(){
+      this.$store.commit("changeDrawer",this.drawer);
+    }
+},
 
   computed: {
     ...mapGetters([
       "getListCondidacies",
       "getFullBranch",
+      "drawer"
     ]),
 
    

@@ -165,6 +165,7 @@ export default {
       this.$store.commit(
         "setFullBranch",
         "Génie du Logiciel et des Systèmes Informatiques Distribués"
+          
       );
       this.$store.commit("setBranch", "GLSID");
       this.$store.dispatch('upDateCondidacies')
