@@ -9,7 +9,15 @@ import  confirmationEmail from './components/User/confirmationEmail.vue'
 import  dashUser from './components/User/dashUser.vue'
 import  resetPassword from './components/User/resetPassword.vue'
 import  confirmemail from './components/User/confirmemail.vue'
-import  dashAdmin from './components/Admin/dashAdmin.vue'
+
+
+
+
+import condidacies from './components/Admin/condidacies'
+import condidaciesAccepted from './components/Admin/condidaciesAccepted'
+import condidaciesRejected from './components/Admin/condidaciesRejected'
+
+
 import Axios from 'axios';
 
 
@@ -31,7 +39,7 @@ const routes = [
         name:'SignInUser',
         beforeEnter: (to, from, next) =>{
             axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
+               return next({name:'dashUser'})
             }).catch(()=>{
                 next()
             })
@@ -43,7 +51,7 @@ const routes = [
         name:'SignUp',
         beforeEnter: (to, from, next) =>{
             axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
+               return next({name:'dashUser'})
             }).catch(()=>{
                 next()
             })
@@ -80,19 +88,29 @@ const routes = [
         name:'confirmemail'
     },
 
-    {
 
-        path:'/dash-admin',
-        component:dashAdmin,
-        name:'dashAdmin',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                next()
-            }).catch(()=>{
-                return next({name:'SignInUser'})
-            })
-        }
-    },
+
+
+   /*  associer */
+   {
+    path:'/condidacies', 
+    component:condidacies,
+    name:'condidacies'
+},
+
+{
+    path:'/condidacies-accepted',
+    component:condidaciesAccepted,
+    name:'condidaciesAccepted'
+},
+{
+    path:'/condidacies-rejected',
+    component:condidaciesRejected,
+    name:'condidaciesRejected'
+},
+
+
+
 
 
 

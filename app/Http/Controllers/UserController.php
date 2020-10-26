@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserProfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -96,17 +97,54 @@ class UserController extends Controller
             'role' => ['required'],
         ]);
 
-      return User::create([
-            'firstname' => request('firstname'),
-            'lastname' => request('lastname'),
+     $user =  User::create([
+            //'firstname' => request('firstname'),
+           // 'lastname' => request('lastname'),
             'email' => request('email'),
-            'phonenumber' => request('phonenumber'),
-            'CNE' => request('CNE'),
-            'datebirth' => request('datebirth'),
+            //'phonenumber' => request('phonenumber'),
+           // 'CNE' => request('CNE'),
+           // 'datebirth' => request('datebirth'),
             'password' => Hash::make(request('password')),
-            'sexe' => request('sexe'),
+            //'sexe' => request('sexe'),
             'role' => request('role')
         ]);
+ 
+
+        $userProfil = new UserProfil;
+
+        $userProfil->user()->associate($user);
+
+        $userProfil->firstname = request('firstname');
+        $userProfil->lastname = request('lastname');
+        $userProfil->phonenumber = request('phonenumber');
+        $userProfil->CNE = request('CNE');
+        $userProfil->datebirth = request('datebirth');
+        $userProfil->sexe = request('sexe');
+
+        $userProfil->age=0;
+        $userProfil->diploma='';
+        $userProfil->CNI='';
+        $userProfil->grade_s1=0;
+        $userProfil->grade_s2=0;
+        $userProfil->grade_s3=0;
+        $userProfil->grade_s4=0;
+        $userProfil->specialty_bac2='';
+
+        $userProfil->save();
+
+    //    $userProfil = UserProfil::create([
+    //         'firstname' => request('firstname'),
+    //         'user_id' =>request($user->id),
+    //         'lastname' => request('lastname'),
+    //         'phonenumber' => request('phonenumber'),
+    //         'CNE' => request('CNE'),
+    //         'datebirth' => request('datebirth'),
+    //         'sexe' => request('sexe'),
+    //     ]);
+       
+     
+        
+       return response($userProfil,201);
     }
 
     /**

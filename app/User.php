@@ -16,16 +16,28 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
+       // 'firstname',
+        //'lastname',
         'email',
-        'phonenumber',
-        'CNE',
-        'datebirth',
+      //  'phonenumber',
+        //'CNE',
+        //'datebirth',
         'password',
-        'sexe',
+        //'sexe',
         'role'
     ];
+
+    public function userProfile(){
+        return $this->hasOne('App\UserProfil');
+    }
+
+    public function adminProfile(){
+        return $this->hasOne('App\UserProfil');
+    }
+    // public function condidacies()
+    // {
+    //     return $this->hasMany('App\Condidacies');
+    // }
 
     /**
      * The attributes that should be hidden for arrays.

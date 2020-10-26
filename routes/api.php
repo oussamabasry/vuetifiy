@@ -35,3 +35,6 @@ Route::post('/forgot','ForgotController@forgot');
 Route::post('/reset','ForgotController@reset');
 Route::post('/send-email-confirm','ConfirmemailController@SendEmailConfirm');
 Route::post('/confirm-email','ConfirmemailController@ConfirmEmail');
+Route::get('/glsid-condidacies','AdminController@glsidCondidacies');
+Route::post('/accept','AdminController@acceptCondidacie');
+Route::post('/refuse','AdminController@refuseCondidacie');
