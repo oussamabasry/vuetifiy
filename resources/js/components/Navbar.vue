@@ -188,7 +188,7 @@ export default {
         "Génie Mécanique des Systèmes Industriels"
       );
       this.$store.commit("setBranch", "GMSI");
-       this.$store.dispatch('upDateCondidacies')
+      this.$store.dispatch('upDateCondidacies')
     },
     changeToSeer() {
       this.$store.commit(

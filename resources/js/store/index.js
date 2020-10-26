@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
         user: null,
         drawer: true,
         listcondidacies: [
-          
+
         ],
         fullBranch: 'Génie du Logiciel et des Systèmes Informatiques Distribués',
         branch: 'GLSID'
@@ -26,22 +26,61 @@ export const store = new Vuex.Store({
         setFullBranch(state, payload) {
             state.fullBranch = payload
         },
-        setListCondidacies(state,payload){
+        setListCondidacies(state, payload) {
+            state.listcondidacies = payload
+        },
+        acceptCondidacieAction(state, payload) {
+            state.listcondidacies = payload
+        },
+        refuseCondidacieAction(state, payload){
             state.listcondidacies = payload
         }
 
     },
+
+
     actions: {
-        async upDateCondidacies({commit}){
-           
-                try {
-                  const response = await axios.get('/api/glsid-condidacies?branch='+this.state.branch);
-                  commit('setListCondidacies',response.data);
-                } catch (error) {
-                  console.error(error);
+        async upDateCondidacies({ commit }) {
+
+            try {
+                const response = await axios.get('/api/glsid-condidacies?branch=' + this.state.branch);
+                commit('setListCondidacies', response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        async acceptCondidacie({ commit }, idCondidacie) {
+
+            try {
+                const response = await axios.post('/api/accept', { 'id': idCondidacie });
+                var list = this.state.listcondidacies;
+                for (let condidat of list) {
+                    if (condidat.id === idCondidacie) {
+                        condidat.accepted = 1;
+                        break;
+                    }
                 }
-                
-              
+                commit('acceptCondidacieAction', list);
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async refuseCondidacie({ commit }, idCondidacie) {
+
+            try {
+                const response = await axios.post('/api/refuse', { 'id': idCondidacie });
+                var list = this.state.listcondidacies;
+                for (let condidat of list) {
+                    if (condidat.id === idCondidacie) {
+                        condidat.accepted = 0;
+                        break;
+                    }
+                }
+                commit('refuseCondidacieAction', list);
+            } catch (error) {
+                console.error(error);
+            }
         }
 
     },
@@ -57,49 +96,11 @@ export const store = new Vuex.Store({
             return state.listcondidacies.find(cand => cand.id === id)
         },
 
-        getCondidates: (state) => {
-            return state.listcondidacies
-        },
-        getGlsidCondidacies(state) {
 
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "GLSID"
-            );
-        },
-        getBdccCondidacies(state) {
 
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "BDCC"
-            );
+        getListCondidacies(state) {
+            return state.listcondidacies;
         },
-        getGilCondidacies(state) {
-
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "GIL"
-            );
-        },
-        getGmsiCondidacies(state) {
-
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "GMSI"
-            );
-        },
-        getSeerCondidacies(state) {
-
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "SEER"
-            );
-        },
-        getGecsiCondidacies(state) {
-
-            return state.listcondidacies.filter(
-                (cond) => cond.filiere === "GECSI"
-            );
-        },
-
-       getListCondidacies(state){
-           return state.listcondidacies;
-       },
 
 
 

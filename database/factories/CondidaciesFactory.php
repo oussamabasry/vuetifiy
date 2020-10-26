@@ -10,6 +10,7 @@ $factory->define(Condidacies::class, function (Faker $faker) {
 
        'user_profil_id' =>  0,
        'branch' => $faker->randomElement(['GLSID','BDCC','GIL','GMSI','SEER','GECSI'],1),
-       'accepted' => $faker->randomElement([true,false,null]),
+      // 'accepted' => $faker->randomElement([true,false,null]),
+      'accepted' => null,
     ];
 });
