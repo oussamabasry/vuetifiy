@@ -1,12 +1,11 @@
 <template>
   <v-layout row class="ma-10">
-  
-     <v-app-bar-nav-icon class="mb-3" @click.stop="drawing"></v-app-bar-nav-icon>
-    
+    <v-app-bar-nav-icon class="mb-3" @click.stop="drawing"></v-app-bar-nav-icon>
+
     <v-flex md12>
       <v-app style="background-color: white" class="ma-n4 ml-2">
         <v-container>
-          <v-bottom-navigation color="#2471A3 " grow class="mb-10">
+          <v-bottom-navigation color="#2471A3 " grow class="mb-3">
             <v-btn to="/condidacies">
               <span>Candidatures</span>
 
@@ -14,17 +13,19 @@
             </v-btn>
 
             <v-btn to="/condidacies-accepted">
-              <span>Candidatures acceptées</span>
+              <span>Acceptées</span>
 
               <v-icon>fa-check-square</v-icon>
             </v-btn>
 
             <v-btn to="/condidacies-rejected">
-              <span>Candidatures rejtées</span>
+              <span>Rejtées</span>
 
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-bottom-navigation>
+
+ 
 
           <v-alert
             class="mt-3 p-3"
@@ -145,6 +146,7 @@
 import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
 
+
 export default {
   data() {
     return {
@@ -155,14 +157,10 @@ export default {
       headers: [
         {
           text: "Prénom",
-          align: "start",
-          sortable: false,
           value: "firstname",
         },
         {
           text: "Nom",
-          align: "start",
-          sortable: false,
           value: "lastname",
         },
         { text: "Note diplome", value: "note" },
@@ -174,40 +172,39 @@ export default {
   },
 
   methods: {
-
-      ...mapActions([
-      'upDateCondidacies',
-      'acceptCondidacie',
-      'refuseCondidacie'
-      
+    ...mapActions([
+      "upDateCondidacies",
+      "acceptCondidacie",
+      "refuseCondidacie",
+      "",
     ]),
 
+  
     handleRowClick(item) {
       this.dialog = !this.dialog;
       this.item = item;
     },
     accept(idCondidacie) {
-       this.acceptCondidacie(idCondidacie)
+      this.acceptCondidacie(idCondidacie);
       this.dialog = !this.dialog;
     },
     refuse(idCondidacie) {
-       this.refuseCondidacie(idCondidacie)
+      this.refuseCondidacie(idCondidacie);
       this.dialog = !this.dialog;
     },
 
-    drawing(){
-      this.$store.commit("changeDrawer",this.drawer);
-    }
-
+    drawing() {
+      this.$store.commit("changeDrawer", this.drawer);
+    },
   },
 
-    computed: {
-      ...mapGetters(["getListCondidacies", "getFullBranch","drawer"]),
+  computed: {
+    ...mapGetters(["getListCondidacies", "getFullBranch", "drawer"]),
 
-      getListCondidaciesFilter() {
-        return this.getListCondidacies.filter(function (condidate) {
-          return condidate.accepted === null; 
-        });
+    getListCondidaciesFilter() {
+      return this.getListCondidacies.filter(function (condidate) {
+        return condidate.accepted === null;
+      });
     },
   },
 };

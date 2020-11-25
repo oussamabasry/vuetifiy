@@ -17,13 +17,13 @@
     </v-btn>
 
     <v-btn to="/condidacies-accepted">
-      <span>Candidatures acceptées</span>
+      <span>Acceptées</span>
 
       <v-icon>fa-check-square</v-icon>
     </v-btn>
 
     <v-btn to="/condidacies-rejected"> 
-      <span>Candidatures rejtées</span>
+      <span>Rejtées</span>
 
       <v-icon>mdi-delete</v-icon>
     </v-btn>
@@ -163,14 +163,10 @@ export default {
       headers: [
         {
           text: "Prénom",
-          align: "start",
-          sortable: false,
           value: "firstname",
         },
          {
           text: "Nom",
-          align: "start",
-          sortable: false,
           value: "lastname",
         },
         { text: "Note diplome", value: "note" },
@@ -204,6 +200,9 @@ export default {
    
   },
 
+beforeCreate(){
+ this.$store.commit("changeDrawerToFalse");
+},
 
   computed: {
     ...mapGetters([

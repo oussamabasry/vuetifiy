@@ -303,6 +303,7 @@ export default {
                    confirmpassword: '',
                    sexe: "Femme",
                    role:'user',
+                   id_user:0,
             },
 
             date: new Date().toISOString().substr(0, 10),

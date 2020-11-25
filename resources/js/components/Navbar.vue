@@ -88,13 +88,7 @@
               <v-img src="/03.png"></v-img>
             </v-list-item-avatar>
 
-            <v-list-item-action class="ml-8">
-              <v-badge color="error" overlap>
-                <template slot="badge">3 </template>
-
-                <v-icon color="tertiary">mdi-bell</v-icon>
-              </v-badge>
-            </v-list-item-action>
+        
           </v-list-item>
         </v-flex>
         <v-flex md-2>
@@ -108,21 +102,7 @@
           </v-tooltip>
         </v-flex>
 
-        <v-flex md12>
-          <v-card color="grey darken-1">
-            <v-list-item dense>
-              <v-list-item-action>
-                <v-btn class="mx-2" fab dark small color="blue">
-                  <v-icon dark>mdi-heart</v-icon>
-                </v-btn>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>AAE Idea</v-list-item-title>
-              </v-list-item-content>
-              <v-icon dark class="mr-2">fa-chevron-down</v-icon>
-            </v-list-item>
-          </v-card>
-        </v-flex>
+       
       </v-layout>
     </v-navigation-drawer>
   </nav>
@@ -173,6 +153,7 @@ export default {
         "setFullBranch",
         "Génie du Logiciel et des Systèmes Informatiques Distribués"  
       );
+      this.$store.commit("setDepartement","Département Mathématique et Informatique");
       this.$store.commit("setBranch", "GLSID");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);
@@ -180,14 +161,16 @@ export default {
     changeToBdcc() {
       this.$store.commit(
         "setFullBranch",
-        "Ingénierie Informatique : Big Data et Cloud Computing"
+        "Ingénierie Informatique : Big Data et Cloud Computing (II-BDCC)"
       );
+      this.$store.commit("setDepartement","Département Mathématique et Informatique");
       this.$store.commit("setBranch", "BDCC");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);
     },
     changeToGil() {
-      this.$store.commit("setFullBranch", "Génie Industriel et Logistique");
+      this.$store.commit("setFullBranch", "Génie Industriel et Logistique (GIL)");
+      this.$store.commit("setDepartement","Département Génie Mécanique");
       this.$store.commit("setBranch", "GIL");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);
@@ -195,8 +178,9 @@ export default {
     changeToGmsi() {
       this.$store.commit(
         "setFullBranch",
-        "Génie Mécanique des Systèmes Industriels"
+        "Génie Mécanique des Systèmes Industriels (GMSI)"
       );
+      this.$store.commit("setDepartement","Département Génie Mécanique");
       this.$store.commit("setBranch", "GMSI");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);
@@ -204,8 +188,9 @@ export default {
     changeToSeer() {
       this.$store.commit(
         "setFullBranch",
-        "Systèmes Electriques et Energies Renouvelables"
+        "Systèmes Electriques et Energies Renouvelables (SEER)"
       );
+      this.$store.commit("setDepartement","Département Génie Electrique");
       this.$store.commit("setBranch", "SEER");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);
@@ -213,8 +198,9 @@ export default {
     changeToGecsi() {
       this.$store.commit(
         "setFullBranch",
-        "Génie Electrique et Contrôle des Systèmes Industriels"
+        "Génie Electrique et Contrôle des Systèmes Industriels (GECSI)"
       );
+      this.$store.commit("setDepartement","Département Génie Electrique");
       this.$store.commit("setBranch", "GECSI");
       this.$store.dispatch('upDateCondidacies');
       this.$store.commit("changeDrawer",this.drawer);

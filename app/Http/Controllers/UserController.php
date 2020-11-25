@@ -13,7 +13,8 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
@@ -21,39 +22,35 @@ class UserController extends Controller
 
         $user = DB::table('users')->where('email', $request->email)->first();
 
-        try{
-            if($user->email_verified_at != null && $user->role=='user'){
+        try {
+            if ($user->email_verified_at != null && $user->role == 'user') {
 
-                if (Auth::attempt($request->only('email','password'))) {
+                if (Auth::attempt($request->only('email', 'password'))) {
                     return response()->json(Auth::user(), 200);
-                 }
+                }
+            } elseif ($user->email_verified_at != null && $user->role == 'admin') {
 
-            }elseif($user->email_verified_at != null && $user->role=='admin'){
-
-                if (Auth::attempt($request->only('email','password'))) {
+                if (Auth::attempt($request->only('email', 'password'))) {
                     return response()->json(Auth::user(), 201);
-                 }
-
-            } elseif($user->email_verified_at == null){
-               return response([
-                   'message' => 'you must confirm your email'
-               ],403);
+                }
+            } elseif ($user->email_verified_at == null) {
+                return response([
+                    'message' => 'you must confirm your email'
+                ], 403);
             }
-
-        }catch(\Exception $exception){
-           return response([
-               'message' => $exception->getMessage()
-           ],400);
+        } catch (\Exception $exception) {
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
         }
 
         return response([
             'message' => 'Invalid email or password'
-        ],401);
-
-
+        ], 401);
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
     }
     /**
@@ -86,29 +83,30 @@ class UserController extends Controller
     {
 
         request()->validate([
-            'firstname' =>['required','max:20','min:3'],
-            'lastname' =>['required','max:20','min:3'],
-            'email' =>['required','email','unique:users'],
-            'phonenumber' =>['required','max:15','min:10'],
-            'CNE' =>['required'],
-            'datebirth' =>['required','date','before:2005-01-01'],
-            'password' =>['required','min:8'],
+            'firstname' => ['required', 'max:20', 'min:3'],
+            'lastname' => ['required', 'max:20', 'min:3'],
+            'email' => ['required', 'email', 'unique:users'],
+            'phonenumber' => ['required', 'max:15', 'min:10'],
+            'CNE' => ['required'],
+            'datebirth' => ['required', 'date', 'before:2005-01-01'],
+            'password' => ['required', 'min:8'],
             'sexe' => ['required'],
             'role' => ['required'],
         ]);
 
-     $user =  User::create([
+      $user =  User::create([
             //'firstname' => request('firstname'),
-           // 'lastname' => request('lastname'),
+            // 'lastname' => request('lastname'),
             'email' => request('email'),
-            //'phonenumber' => request('phonenumber'),
-           // 'CNE' => request('CNE'),
-           // 'datebirth' => request('datebirth'),
+            //'phonenumber' =>   request('phonenumber'),
+            // 'CNE' => request('CNE'),
+            // 'datebirth' => request('datebirth'),
             'password' => Hash::make(request('password')),
             //'sexe' => request('sexe'),
             'role' => request('role')
         ]);
- 
+
+     
 
         $userProfil = new UserProfil;
 
@@ -121,30 +119,32 @@ class UserController extends Controller
         $userProfil->datebirth = request('datebirth');
         $userProfil->sexe = request('sexe');
 
-        $userProfil->age=0;
-        $userProfil->diploma='';
-        $userProfil->CNI='';
-        $userProfil->grade_s1=0;
-        $userProfil->grade_s2=0;
-        $userProfil->grade_s3=0;
-        $userProfil->grade_s4=0;
-        $userProfil->specialty_bac2='';
+        $userProfil->age = 0;
+        $userProfil->note=0;
+        $userProfil->diploma = '';
+        $userProfil->CNI = '';
+        $userProfil->CNE = '';
+        $userProfil->grade_s1 = 0;
+        $userProfil->grade_s2 = 0;
+        $userProfil->grade_s3 = 0;
+        $userProfil->grade_s4 = 0;
+        $userProfil->specialty_bac2 = '';
 
         $userProfil->save();
 
-    //    $userProfil = UserProfil::create([
-    //         'firstname' => request('firstname'),
-    //         'user_id' =>request($user->id),
-    //         'lastname' => request('lastname'),
-    //         'phonenumber' => request('phonenumber'),
-    //         'CNE' => request('CNE'),
-    //         'datebirth' => request('datebirth'),
-    //         'sexe' => request('sexe'),
-    //     ]);
-       
-     
-        
-       return response($userProfil,201);
+        //    $userProfil = UserProfil::create([
+        //         'firstname' => request('firstname'),
+        //         'user_id' =>request($user->id),
+        //         'lastname' => request('lastname'),
+        //         'phonenumber' => request('phonenumber'),
+        //         'CNE' => request('CNE'),
+        //         'datebirth' => request('datebirth'),
+        //         'sexe' => request('sexe'),
+        //     ]);
+
+
+
+        return response($userProfil, 201);
     }
 
     /**

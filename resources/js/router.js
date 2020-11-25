@@ -31,6 +31,13 @@ const routes = [
         path: '/',
         component:index,
         name:'index',
+        beforeEnter: (to, from, next) =>{
+            axios.get('/api/athentificated').then(()=>{
+                return next({name:'condidacies'})
+            }).catch(()=>{
+                next() 
+            })
+        }
 
     },
     {
@@ -95,18 +102,40 @@ const routes = [
    {
     path:'/condidacies', 
     component:condidacies,
-    name:'condidacies'
+    name:'condidacies',
+    beforeEnter: (to, from, next) =>{
+        axios.get('/api/athentificated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({name:'SignInUser'})
+        })
+    }
 },
+
 
 {
     path:'/condidacies-accepted',
     component:condidaciesAccepted,
-    name:'condidaciesAccepted'
+    name:'condidaciesAccepted',
+    beforeEnter: (to, from, next) =>{
+        axios.get('/api/athentificated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({name:'SignInUser'})
+        })
+    }
 },
 {
     path:'/condidacies-rejected',
     component:condidaciesRejected,
-    name:'condidaciesRejected'
+    name:'condidaciesRejected',
+    beforeEnter: (to, from, next) =>{
+        axios.get('/api/athentificated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({name:'SignInUser'})
+        })
+    }
 },
 
 

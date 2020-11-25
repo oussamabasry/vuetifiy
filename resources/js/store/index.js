@@ -6,15 +6,19 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         user: null,
-        drawer:     false,
+        drawer: true,
         listcondidacies: [],
-        fullBranch: 'Génie du Logiciel et des Systèmes Informatiques Distribués',
-        branch: 'GLSID'
+        fullBranch: 'Génie du Logiciel et des Systèmes Informatiques Distribués (GLSID)',
+        branch: 'GLSID',
+        departement: 'Département Mathématique et Informatique ',
     },
 
     mutations: {
         setUser(state, payload) {
             state.user = payload
+        },
+        changeDrawerToFalse(state) {
+            state.drawer = false;
         },
         changeDrawer(state, payload) {
             state.drawer = !payload
@@ -28,10 +32,13 @@ export const store = new Vuex.Store({
         setListCondidacies(state, payload) {
             state.listcondidacies = payload
         },
+        setDepartement(state, payload) {
+            state.departement = payload
+        },
         acceptCondidacieAction(state, payload) {
             state.listcondidacies = payload
         },
-        refuseCondidacieAction(state, payload){
+        refuseCondidacieAction(state, payload) {
             state.listcondidacies = payload
         }
 
@@ -102,14 +109,14 @@ export const store = new Vuex.Store({
         },
 
 
-
-
-
         getBranch(state) {
             return state.branch;
         },
         getFullBranch(state) {
             return state.fullBranch;
+        },
+        getDepartement(state) {
+            return state.departement;
         }
     },
 

@@ -32,6 +32,8 @@
     },
     "dependencies": {
         "eslint-plugin-vue": "^7.1.0",
+        "jspdf": "^2.1.1",
+        "jspdf-autotable": "^3.5.13",
         "view-design": "^4.3.2",
         "vue-router": "^3.4.5",
         "vuelidate": "^0.7.5",
