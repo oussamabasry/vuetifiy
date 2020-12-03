@@ -113,12 +113,13 @@ export default {
         this.loading = true;
         
         const res = await this.callApi("post", "/api/login", this.form);
+        localStorage.setItem("token",res.data.access_token)
         const userData = await this.callApi("post", "/api/me");
         console.log(userData);
         this.loading = false;
         if (res.status == 200) {
           const {data}=userData;
-          this.$store.commit("setUser", res.data); // res.data = data
+          this.$store.commit("setUser", data);
           if (data.role === "admin") this.$router.push({ name: "condidacies" });
           else this.$router.push({ name: "dashUser" });
           
@@ -126,7 +127,7 @@ export default {
           this.email = "";
           this.password = "";
 
-          localStorage.setItem("token",res.data.access_token)
+          
         }
           else if (res.status == 403) {
           this.invalidData = true;
