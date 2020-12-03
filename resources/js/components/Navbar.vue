@@ -115,7 +115,6 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      drawer: true,
       interval: {},
       value: 0,
     };

@@ -113,7 +113,9 @@ computed:{
 
         axios.get('/api/user').then((res)=>{
              this.$store.commit('setUser',res.data)
+             console.log('hi :'+res.data)
           }).catch((error)=>{
+              console.log('hi :'+res.data)
              this.$store.commit('setUser',null)
           })
  },

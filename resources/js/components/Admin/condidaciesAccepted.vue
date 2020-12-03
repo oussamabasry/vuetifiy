@@ -34,6 +34,14 @@
             <v-icon>fa-download</v-icon>&nbsp;&nbsp;Télécharger la liste
           </v-btn>
 
+          <v-btn
+            @click="sendmail"
+            color="black"
+            style="text-transform: none"
+            class="white--text"
+          >
+            <v-icon>f-email</v-icon>envoyer mail
+          </v-btn>
           <v-alert
             class="mt-3 p-3"
             color="#C51162"
@@ -196,6 +204,11 @@ export default {
       return comparison;
     },
 
+    async sendmail(){
+     await axios.get("/api/sendmail",{ params: { branch: this.getBranch} })
+     this.s('vous avez envoyé avec succès')
+    },
+
     generatePDF() {
       const columns = [
         { title: "Nom", dataKey: "lastname" },
@@ -203,7 +216,7 @@ export default {
         { title: "Date de naissance", dataKey: "datebirth" },
         { title: "CIN", dataKey: "CNI" },
       ];
-
+  
       const doc = new jsPDF({
         orientation: "portrait",
         unit: "cm",

@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
-{
-    public function glsidCondidacies(Request $request)
+{    
+    public function __construct()
     {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
+    
+    public function glsidCondidacies(Request $request)
+    {  
 
         $user_profils = DB::table('user_profils')
             ->join('condidacies', 'user_profils.id', 'condidacies.user_profil_id')

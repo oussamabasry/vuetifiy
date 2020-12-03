@@ -22,9 +22,7 @@ Route::middleware('auth:sanctum')->get('/athentificated', function () {
     return true;
 });
 
-Route::middleware('auth:sanctum')->get('/athentificated', function () {
-    return true;
-});
+
 
 
 
@@ -38,3 +36,19 @@ Route::post('/confirm-email','ConfirmemailController@ConfirmEmail');
 Route::get('/glsid-condidacies','AdminController@glsidCondidacies');
 Route::post('/accept','AdminController@acceptCondidacie');
 Route::post('/refuse','AdminController@refuseCondidacie');
+Route::get('/sendmail','EmailController@sendAcceptedMail');
+
+Route::group([
+
+    'middleware' => 'api',
+    
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+    Route::get('/glsid-condidacies','AdminController@glsidCondidacies');
+
+});

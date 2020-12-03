@@ -31,38 +31,20 @@ const routes = [
         path: '/',
         component:index,
         name:'index',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                return next({name:'condidacies'})
-            }).catch(()=>{
-                next() 
-            })
-        }
+        
 
     },
     {
         path: '/sign-in-user',
         component:SignInUser,
         name:'SignInUser',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-               return next({name:'dashUser'})
-            }).catch(()=>{
-                next()
-            })
-          }
+        
     },
     {
         path: '/sign-up',
         component:SignUp,
         name:'SignUp',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-               return next({name:'dashUser'})
-            }).catch(()=>{
-                next()
-            })
-        }
+        
     },
 
     {
@@ -74,13 +56,7 @@ const routes = [
         path:'/dashUser',
         component:dashUser,
         name:'dashUser',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                next()
-            }).catch(()=>{
-                return next({name:'SignInUser'})
-            })
-        }
+        
     },
     {
         path:'/reset-password',
@@ -104,33 +80,36 @@ const routes = [
     component:condidacies,
     name:'condidacies',
     beforeEnter: (to, from, next) =>{
-        axios.get('/api/athentificated').then(()=>{
+        axios.post('/api/me').then(()=>{
             next()
         }).catch(()=>{
             return next({name:'SignInUser'})
         })
     }
+    
 },
 
 
 {
+    
     path:'/condidacies-accepted',
     component:condidaciesAccepted,
     name:'condidaciesAccepted',
     beforeEnter: (to, from, next) =>{
-        axios.get('/api/athentificated').then(()=>{
+        axios.post('/api/me').then(()=>{
             next()
         }).catch(()=>{
             return next({name:'SignInUser'})
         })
     }
+    
 },
 {
     path:'/condidacies-rejected',
     component:condidaciesRejected,
     name:'condidaciesRejected',
     beforeEnter: (to, from, next) =>{
-        axios.get('/api/athentificated').then(()=>{
+        axios.post('/api/me').then(()=>{
             next()
         }).catch(()=>{
             return next({name:'SignInUser'})

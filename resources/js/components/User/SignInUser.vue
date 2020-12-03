@@ -112,22 +112,23 @@ export default {
       if (!this.$v.$invalid) {
         this.loading = true;
         
-        const res = await this.callApi("post", "/api/sign-in-user", this.form);
-
+        const res = await this.callApi("post", "/api/login", this.form);
+        const userData = await this.callApi("post", "/api/me");
+        console.log(userData);
         this.loading = false;
         if (res.status == 200) {
-          this.$store.commit("setUser", res.data);
-          this.$router.push({ name: "dashUser" });
+          const {data}=userData;
+          this.$store.commit("setUser", res.data); // res.data = data
+          if (data.role === "admin") this.$router.push({ name: "condidacies" });
+          else this.$router.push({ name: "dashUser" });
+          
           this.$v.$reset();
           this.email = "";
           this.password = "";
-        } else if (res.status == 201) {
-          this.$store.commit("setUser", res.data);
-          this.$router.push({ name: "condidacies" });
-          this.$v.$reset();
-          this.email = "";
-          this.password = "";
-        } else if (res.status == 403) {
+
+          localStorage.setItem("token",res.data.access_token)
+        }
+          else if (res.status == 403) {
           this.invalidData = true;
           this.confirmemail = true;
           this.error = "Vous devez confirmer votre email";
