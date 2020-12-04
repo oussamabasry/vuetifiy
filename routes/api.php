@@ -14,27 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::middleware('auth:sanctum')->get('/athentificated', function () {
-    return true;
-});
 
-Route::middleware('auth:sanctum')->get('/athentificated', function () {
-    return true;
-});
+Route::group([
 
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+    Route::post('/accept','AdminController@acceptCondidacie');
+    Route::post('/refuse','AdminController@refuseCondidacie');
+    Route::get('condidacies','AdminController@condidacies');    
+});
 
 
 Route::post('/register','UserController@register');
 Route::post('/sign-in-user','UserController@login');
-Route::post('/logout','UserController@logout');
 Route::post('/forgot','ForgotController@forgot');
 Route::post('/reset','ForgotController@reset');
 Route::post('/send-email-confirm','ConfirmemailController@SendEmailConfirm');
 Route::post('/confirm-email','ConfirmemailController@ConfirmEmail');
-Route::get('/glsid-condidacies','AdminController@glsidCondidacies');
-Route::post('/accept','AdminController@acceptCondidacie');
-Route::post('/refuse','AdminController@refuseCondidacie');
+
+

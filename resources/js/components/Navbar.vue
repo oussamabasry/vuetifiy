@@ -115,7 +115,6 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      drawer: true,
       interval: {},
       value: 0,
     };
@@ -207,10 +206,11 @@ export default {
     },
 
     Logout() {
-      axios.post("/api/logout").then((res) => {
-        this.$router.push({ name: "index" });
-        this.$store.commit("setUser", null);
-      });
+
+        this.$store.dispatch('logout')
+        .then(() => {
+            this.$router.push({ name: "SignInUser" });
+        })
     },
   },
 };

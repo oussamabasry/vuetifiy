@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function glsidCondidacies(Request $request)
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
+    public function condidacies(Request $request)
     {
 
         $user_profils = DB::table('user_profils')
@@ -25,15 +31,16 @@ class AdminController extends Controller
         $condidacie = Condidacies::find($request->id);
         $condidacie->accepted = 1;
         $condidacie->save();
-        
+
         return $condidacie;
     }
 
-    public function refuseCondidacie(Request $request){
+    public function refuseCondidacie(Request $request)
+    {
         $condidacie = Condidacies::find($request->id);
         $condidacie->accepted = 0;
         $condidacie->save();
-        
+
         return $condidacie;
     }
 }

@@ -4,7 +4,7 @@
                       <!--Menu Mobile-->
     
         <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-if="userIsAuthenticated && drawer" />           <!-- End Menu Web-->
+        <Navbar v-if="userIsAuthenticated && drawer " />           <!-- End Menu Web-->
 
                              <!--Principal page-->
         <v-main>
@@ -42,7 +42,7 @@ export default {
 computed:{
      ...mapGetters(["drawer"]),
     userIsAuthenticated(){
-      return  this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      return  this.$store.getters.isLoggedIn;
     },
      getUser(){
         return this.$store.getters.user
@@ -52,21 +52,24 @@ computed:{
 
  mounted(){
 
-        axios.get('/api/user').then((res)=>{
-             this.$store.commit('setUser',res.data)
+         axios.post('/api/auth/me',{}, {
+                    headers: {
+                        'Authorization': `bearer ${this.$store.getters.token}`
+                    }
+                    }).then((res)=>{
+              this.$store.commit('setUser',res.data)
           }).catch((error)=>{
-             this.$store.commit('setUser',null)
           })
 
  },
 
 
  methods:{
-        Logout(){
-             axios.post('/api/logout').then((res)=>{
-                 this.$router.push({name:'index'})
-                 this.$store.commit('setUser',null)
-             })
+     Logout() {
+          
+            this.$store.dispatch("logout").then(() => {
+                this.$router.push("/sign-in-user");
+            });
         }
     },
 
