@@ -33,6 +33,7 @@
           >
             <v-icon>fa-download</v-icon>&nbsp;&nbsp;Télécharger la liste
           </v-btn>
+         
           <v-btn
             @click="sendmail"
             color="black"
@@ -41,6 +42,7 @@
           >
             <v-icon>f-email</v-icon>envoyer mail
           </v-btn>
+          
           <v-alert
             class="mt-3 p-3"
             color="#C51162"
