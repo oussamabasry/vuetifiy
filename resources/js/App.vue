@@ -3,8 +3,8 @@
         <loadPage/>
                       <!--Menu Mobile-->
     
-        <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-if="userIsAuthenticated && drawer " />           <!-- End Menu Web-->
+        <Navhome v-if="(!userIsAuthenticated) || (userIsAuthenticated && role=='user') " />      
+        <Navbar v-if="userIsAuthenticated  && role=='admin'" />           <!-- End Menu Web-->
 
                              <!--Principal page-->
         <v-main>
@@ -29,6 +29,7 @@ export default {
     },
     data(){
        return {
+           role:localStorage.getItem('role') || "" ,
            menuItems : [
            {icon:'create',title:'S\'inscrire',link:'/sign-up'},
            {icon:'lock_open',title:'Connexion',link:'/sign-in-user'},

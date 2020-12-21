@@ -1,13 +1,8 @@
 <template>
-  <v-footer
-    dark
-    padless
-    class="mt-8"
-  >
-    <v-card
+  <v-card
       flat
       tile
-      class="green lighten-5  black--text text-center foot"
+      class="brown lighten-5  black--text text-center foot"
     >
       <v-card-text>
         <v-btn
@@ -23,7 +18,21 @@
       </v-card-text>
 
       <v-card-text class="black--text pt-0 ">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        <v-row
+      justify="center"
+      no-gutters
+    >
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        color="black"
+        text
+        rounded
+        class="my-2"
+      >
+        {{ link }}
+      </v-btn>
+      </v-row>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -32,7 +41,6 @@
         {{ new Date().getFullYear() }} — <strong>ENSET Concours</strong>
       </v-card-text>
     </v-card>
-  </v-footer>
 </template>
 
 
@@ -44,6 +52,14 @@
         'mdi-twitter',
         'mdi-linkedin',
         'mdi-instagram',
+      ],
+            links: [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
       ],
     }),
   }
