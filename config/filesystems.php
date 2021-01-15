@@ -45,12 +45,54 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/CV'),
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'cnir' => [
+            'driver' => 'local',
+            'root' => storage_path('app/cnir'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'cniv' => [
+            'driver' => 'local',
+            'root' => storage_path('app/cniv'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'r1' => [
+            'driver' => 'local',
+            'root' => storage_path('app/r1'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'r2' => [
+            'driver' => 'local',
+            'root' => storage_path('app/r2'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'r3' => [
+            'driver' => 'local',
+            'root' => storage_path('app/r3'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'r4' => [
+            'driver' => 'local',
+            'root' => storage_path('app/r4'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'dp' => [
+            'driver' => 'local',
+            'root' => storage_path('app/dp'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

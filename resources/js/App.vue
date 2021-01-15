@@ -3,9 +3,9 @@
         <loadPage/>
                       <!--Menu Mobile-->
     
-        <Navhome v-if="!userIsAuthenticated" />      
-        <Navbar v-if="userIsAuthenticated && drawer " />           <!-- End Menu Web-->
-
+        <Navhome v-if="(!userIsAuthenticated) || (userIsAuthenticated && getUser.role=='user') " />      
+        <Navbar v-if="userIsAuthenticated  && getUser.role=='admin'" />           <!-- End Menu Web-->
+        
                              <!--Principal page-->
         <v-main>
 

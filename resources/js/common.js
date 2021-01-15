@@ -7,20 +7,22 @@ export default {
 
     methods: {
 
-        async callApi(method, url, dataObj){
+
+        async callApi(method, url, dataObj) {
 
             try {
-              return await axios({
+                return await axios({
                     method: method,
                     url: url,
-                    data:dataObj
-                  });
-    
+                    data: dataObj
+                });
+
             } catch (e) {
                 return e.response
-    
+
             }
-            },
+        },
+
 
         i(desc, title = 'Hey') {
             this.$Notice.info({

@@ -3,17 +3,8 @@
     <v-navigation-drawer v-model="drawer" dark app color="#2A3B4D" class="py-0">
       <v-container>
         <v-row>
-          <v-col md="9">
-            <v-progress-circular
-              :rotate="300"
-              :size="50"
-              :width="7"
-              :value="value"
-              color="lime accent-3"
-              class="mt-n1"
-            >
-              {{ value }}
-            </v-progress-circular>
+          <v-col md="9" class="my-8">
+        
           </v-col>
 
           <!-- <v-col md="3">

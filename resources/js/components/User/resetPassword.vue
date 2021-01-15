@@ -1,6 +1,6 @@
 <template>
 
-<v-container class="mt-4">
+<div class="mt-4">
 <v-layout row>
 <v-col class="col-12 col-sm-9 mx-auto">
 <h1 class="blue--text">Récuperation du mot de passe </h1>
@@ -109,15 +109,17 @@
   </v-stepper>
        </v-col>
    </v-layout>
-
-</v-container>
+<foot></foot>
+</div>
 
 </template>
 
 
 <script>
 import {required, maxLength, minLength, email, withParams, sameAs} from "vuelidate/lib/validators";
+import foot from '../foot.vue';
   export default {
+  components: { foot },
     data () {
       return {
         form:{

@@ -11,8 +11,9 @@ import confirmemail from './components/User/confirmemail.vue'
 import condidacies from './components/Admin/condidacies'
 import condidaciesAccepted from './components/Admin/condidaciesAccepted'
 import condidaciesRejected from './components/Admin/condidaciesRejected'
-
-
+import form from './components/User/form.vue'
+import filliere from './components/User/filliere.vue'
+import profil from './components/User/profil.vue'
 import store from './store/index'
 
 
@@ -29,10 +30,48 @@ const routes = [
             const role =  localStorage.getItem('role');
             if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
             else if(role === 'user') next({name: 'dashUser'})
+            
             else next()
           }
 
     },
+    {
+        path: '/form',
+        component: form,
+        name: 'form',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+    {
+        path: '/filliere',
+        component: filliere,
+        name: 'filliere',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+     {
+        path: '/profil',
+        component: profil,
+        name: 'profil',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+
     {
         path: '/condidacies-accepted',
         component: condidaciesAccepted,

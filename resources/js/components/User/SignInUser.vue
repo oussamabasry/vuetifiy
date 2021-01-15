@@ -36,7 +36,7 @@
 
             <v-card-actions>
                 <v-btn
-                    color="pink"
+                    color="blue darken-1"
                     width="40%"
                     dark
                     rounded
@@ -62,6 +62,7 @@
                 </v-col>
             </v-row>
         </v-card>
+         <foot></foot>
     </div>
 </template>
 
@@ -153,6 +154,6 @@ export default {
 }
 
 .route:hover {
-    color: #e71061;
+    color: #2E86C1;
 }
 </style>

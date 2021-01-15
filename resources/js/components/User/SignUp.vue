@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <div>
         <v-layout row>
             <v-flex xs12 sm8 offset-sm2>
                 <v-hover v-slot:default="{ hover }" open-delay="200">
@@ -211,14 +211,14 @@
                                                         label="Femme"
                                                         value="Femme"
                                                         name="sexe"
-                                                        color="black"
+                                                        color="blue darken-1"
                                                         mandatory
                                                     ></v-radio>
                                                     <v-radio
                                                         label="Homme"
                                                         value="Homme"
                                                         name="sexe"
-                                                        color="black"
+                                                        color="blue darken-1"
                                                     ></v-radio>
                                                 </v-radio-group>
                                             </v-col>
@@ -231,7 +231,7 @@
                                                 <v-btn
                                                     class=""
                                                     type="submit"
-                                                    color="pink"
+                                                    color="blue darken-1"
                                                     dark
 
                                                     :loading="loading"
@@ -274,7 +274,8 @@
             </v-flex>
         </v-layout>
         <foot></foot>
-    </v-container>
+    </div>
+    
 </template>
 
 <script>
@@ -507,7 +508,7 @@ export default {
     color:#2E4053;
 }
 .auth:hover{
-    color:#E71061;
+    color:#2E86C1;
 }
 
 </style>

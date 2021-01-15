@@ -25,7 +25,7 @@
                     v-else
                     active-class="primary--text text--accent-4"
                 >
-                    <v-list-item to="/myaccount">
+                    <v-list-item to="/profil">
                         <v-list-item-title>
                             <v-icon class="mr-2">person</v-icon>
                             Mon compte
@@ -46,7 +46,7 @@
 
         <!-- Menu Web-->
         <v-app-bar
-            class="green lighten-5 font-weight-medium mr-0 "
+            class="blue lighten-5 font-weight-medium mr-0 "
             height="52%"
             app
         >
@@ -94,7 +94,7 @@
                     text
                     class="btn"
                     width="150px"
-                    to="/myaccount"
+                    to="/profil"
                 >
                     <v-icon class="mr-2">person</v-icon>
                     Mon compte
