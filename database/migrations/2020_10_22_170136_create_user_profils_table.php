@@ -40,6 +40,7 @@ class CreateUserProfilsTable extends Migration
             $table->string('Relevet_S2');
             $table->string('Relevet_S3');
             $table->string('Relevet_S4');
+            
 
             
             

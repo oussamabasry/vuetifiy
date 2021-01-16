@@ -242,11 +242,9 @@ import foot from '../foot.vue';
     }),
     methods:{
         addtask(){
-            console.log(this.form.CNE)
-            console.log(this.form.CNI)
         axios.post('/api/user_profils',this.form)
   .then(function (response) {
-    console.log(response);
+ 
   })
   .catch(function (error) {
     console.log(error);

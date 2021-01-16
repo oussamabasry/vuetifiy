@@ -121,10 +121,11 @@ export default {
 
                 this.$store
                     .dispatch("login", { email, password })
-                    .then(() => {
-                      
+                    .then((res) => {
+                      console.log(res.data.user.completed);
                       if(localStorage.getItem('role') === 'admin') this.$router.push("/condidacies")
-                      else  this.$router.push("/dashUser")
+                      else if(localStorage.getItem('role') === 'user' && res.data.user.completed  === 0) this.$router.push("/dashUser")
+                      else if(localStorage.getItem('role') === 'user' && res.data.user.completed === 1) this.$router.push("/filliere")
                     })
                     .catch(err => {
                         console.log(err);

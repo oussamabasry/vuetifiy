@@ -26,12 +26,16 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $token = JWTAuth::attempt($credentials);
+        if ($token == null || auth()->user()->email_verified_at == null) {
+            auth()->logout();
+            return response([
+                'message' => 'Invalid email or password'
+            ], 401);
         }
 
         return $this->respondWithToken($token);
+            
     }
 
     /**

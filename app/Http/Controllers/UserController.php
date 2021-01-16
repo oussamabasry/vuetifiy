@@ -26,7 +26,7 @@ class UserController extends Controller
             if ($user->email_verified_at != null && $user->role == 'user') {
 
                 if (Auth::attempt($request->only('email', 'password'))) {
-                    return response()->json(Auth::user(), 200);
+                    return response()->json(Auth::user(), 300);
                 }
             } elseif ($user->email_verified_at != null && $user->role == 'admin') {
 
@@ -50,23 +50,29 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+    
         $id = Auth::id(); 
         $note = ($request->note_S1+ $request->note_S2+$request->note_S3+$request->note_S4)/4;
         $affected = DB::table('user_profils')
               ->where('user_id', $id)
-              ->update(['CNE' => $request-> CNE,'CNI' => $request-> CNI,
+              ->update([
+              'CNE' => $request->CNE,
+              'CNI' => $request->CNI,
               'grade_s1' => $request->note_S1,
               'grade_s2' => $request->note_S2,
               'grade_s3' => $request->note_S3,
                'grade_s4' => $request->note_S4, 
                'note' => $note,
               'année_bac' => $request->annee_bac,
-              'filliere' => $request->filliere
-              
-              ,'année_bac2' => $request->annee_bac2,
+              'filliere' => $request->filliere,
+              'année_bac2' => $request->annee_bac2,
               ]);
-        
-              
+        $user = auth()->user();
+        $userCompleted = DB::table('users')
+              ->where('id', $user->id)
+              ->update([
+                'completed' => 1
+              ]);
      
     return "succes";
     }
@@ -423,6 +429,8 @@ class UserController extends Controller
 
         $userProfil = new UserProfil;
 
+        $years = \Carbon\Carbon::parse(request('datebirth'))->age;
+
         $userProfil->user()->associate($user);
 
         $userProfil->firstname = request('firstname');
@@ -432,7 +440,7 @@ class UserController extends Controller
         $userProfil->datebirth = request('datebirth');
         $userProfil->sexe = request('sexe');
 
-        $userProfil->age = 0;
+        $userProfil->age = $years;
         $userProfil->note=0;
         $userProfil->diploma = '';
         $userProfil->CNI = '';
@@ -442,6 +450,8 @@ class UserController extends Controller
         $userProfil->grade_s3 = 0;
         $userProfil->grade_s4 = 0;
         
+        $userProfil->completed = 0;
+
         $userProfil->CV = '';
         $userProfil->filliere = '';
         $userProfil->année_bac = '';

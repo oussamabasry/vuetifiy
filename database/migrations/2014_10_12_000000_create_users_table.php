@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['user','admin'])->default('user');
+            $table->integer('completed');
             $table->rememberToken();
             $table->timestamps();
             
@@ -52,7 +53,8 @@ class CreateUsersTable extends Migration
             'email_verified_at' => '2020-10-16 11:44:16',
             'password' => Hash::make('user'),
             //'sexe' => 'Homme',
-            'role' => 'user'
+            'role' => 'user',
+            
         ]);
     }
 

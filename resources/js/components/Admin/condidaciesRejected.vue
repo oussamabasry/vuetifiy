@@ -172,7 +172,7 @@ export default {
         { text: "Note diplome", value: "note" },
         { text: "Âge", value: "age" },
         { text: "Diplôme", value: "diploma" },        
-        { text: "Spécialité bac+2", value: "specialty_bac2" },
+        { text: "Spécialité bac+2", value: "filliere" },
       ],
     };
   },
