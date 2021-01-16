@@ -59,11 +59,14 @@ class UserController extends Controller
               'grade_s2' => $request->note_S2,
               'grade_s3' => $request->note_S3,
                'grade_s4' => $request->note_S4, 
-               'note' => $note,
+               'diploma' => $request->diplome, 
+               
               'année_bac' => $request->annee_bac,
               'filliere' => $request->filliere
               
               ,'année_bac2' => $request->annee_bac2,
+              'note' => ($request->note_S1 + $request->note_S2 + $request->note_S3 + $request->note_S4 )/4
+
               ]);
         
               
@@ -196,7 +199,10 @@ class UserController extends Controller
      */
      public function index()
      {
-         $condidacies = DB::select('select * from user_profils');
+        $id = Auth::id(); 
+        
+         $condidacies = DB::select('SELECT * FROM `user_profils` WHERE user_id='.$id.' ');
+        
          return response()->json($condidacies);
      }
      public function savefile(Request $request)

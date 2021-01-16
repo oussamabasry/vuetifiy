@@ -57,9 +57,16 @@
       <input  class="form-control" v-model="form.annee_bac2" placeholder="Ex: 2017" required>
     </div>
   </div>
-  <div class="form-group ">
+  <div class="form-row">
+    <div class="form-group col-md-6">
       <label for="inputEmail4"> <strong class="z">filière</strong> </label>
       <input  class="form-control" v-model="form.filliere"  placeholder="filière" required>
+     </div>
+     <div class="form-group col-md-6 ">
+      <label for="inputEmail4"> <strong class="z">diplome</strong> </label>
+     
+      <input  class="form-control" v-model="form.diplome"  placeholder="diplome" required>
+    </div>
     </div>
    <div class="form-row">
     
@@ -160,7 +167,7 @@
   </div>
   </v-parallax>
    
-    <foot></foot>
+    
   
   
     </v-app>
@@ -199,9 +206,9 @@
 </style>>
 
 <script>
-import foot from '../foot.vue';
+
   export default {
-  components: { foot },
+  
     data: () => ({
       icons: [
         'mdi-facebook',
@@ -234,6 +241,7 @@ import foot from '../foot.vue';
     note_S3:'',
     note_S4:'',
     filliere:'',
+    diplome:'',
     annee_bac:'',
     annee_bac2:''
       },

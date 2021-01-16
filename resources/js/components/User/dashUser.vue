@@ -75,14 +75,14 @@ L'accès en première année d'une filière du cycle Ingénieur est ouvert : <br
  
 
   </v-parallax>
-     <foot ></foot>
+    
     </v-app>
 </template>
 
 <script>
-import foot from '../foot.vue';
+
 export default {
-  components: { foot },
+
      data: () => ({
        condidacies : {},
       show: false,
