@@ -1,38 +1,43 @@
 <template>
-  <v-footer
-    dark
-    padless
-    class="mt-8"
-  >
-    <v-card
+  <v-card
       flat
       tile
-      class="green lighten-5  black--text text-center foot"
+      class="blue lighten-5 font-weight-medium  text-center foot mt-16"
     >
-      <v-card-text>
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4 black--text"
-          icon
-        >
-          <v-icon size="24px">
-            {{ icon }}
-          </v-icon>
-        </v-btn>
-      </v-card-text>
+ 
 
-      <v-card-text class="black--text pt-0 ">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      <v-card-text class="primary--text pt-0 ">
+        <v-row
+      justify="center"
+      no-gutters
+    >
+      <v-btn
+        v-for="item in menuItems"
+        :key="item.title"
+        :to="item.link"
+        color="primary"
+        text
+        rounded
+        class="my-2 mx-10"
+      >
+        {{ item.title }}
+      </v-btn>
+      </v-row>
+      <v-row
+      justify="center"
+      no-gutters
+      class="my-3"
+      >
+      <a href="https://www.enset-media.ac.ma/" target="_blank" rel="noopener noreferrer">Site: www.enset-media.ac.ma</a>
+    </v-row>
       </v-card-text>
 
       <v-divider></v-divider>
 
-      <v-card-text class="black--text">
-        {{ new Date().getFullYear() }} — <strong>ENSET Concours</strong>
+      <v-card-text class="primary--text">
+        <strong>ENSET Concours © </strong>{{ new Date().getFullYear() }} 
       </v-card-text>
     </v-card>
-  </v-footer>
 </template>
 
 
@@ -45,7 +50,20 @@
         'mdi-linkedin',
         'mdi-instagram',
       ],
+            links: [
+        'Home',
+        'S\'inscrire',
+        'Connexion',
+      ],
+      menuItems: [
+                { title: "Home", link: "/" },
+                { title: "S'inscrire", link: "/sign-up" },
+                { title: "Connexion", link: "/sign-in-user" }
+            ]
     }),
   }
 </script>
 
+<style lang="stylus" scoped>
+
+</style>

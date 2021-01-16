@@ -2,106 +2,184 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router);
 
-import  index from './components/index.vue'
-import  SignInUser from './components/User/SignInUser.vue'
-import  SignUp from './components/User/SignUp.vue'
-import  confirmationEmail from './components/User/confirmationEmail.vue'
-import  dashUser from './components/User/dashUser.vue'
-import  resetPassword from './components/User/resetPassword.vue'
-import  confirmemail from './components/User/confirmemail.vue'
-import  dashAdmin from './components/Admin/dashAdmin.vue'
-import Axios from 'axios';
-
-
-
+import index from './components/index.vue'
+import SignInUser from './components/User/SignInUser.vue'
+import SignUp from './components/User/SignUp.vue'
+import dashUser from './components/User/dashUser.vue'
+import resetPassword from './components/User/resetPassword.vue'
+import confirmemail from './components/User/confirmemail.vue'
+import condidacies from './components/Admin/condidacies'
+import condidaciesAccepted from './components/Admin/condidaciesAccepted'
+import condidaciesRejected from './components/Admin/condidaciesRejected'
+import form from './components/User/form.vue'
+import filliere from './components/User/filliere.vue'
+import profil from './components/User/profil.vue'
+import store from './store/index'
 
 
 
 
 const routes = [
+    
+    {
+        path: '/condidacies',
+        component: condidacies,
+        name: 'condidacies',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'user') next({name: 'dashUser'})
+            
+            else next()
+          }
+
+    },
+    {
+        path: '/form',
+        component: form,
+        name: 'form',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+    {
+        path: '/filliere',
+        component: filliere,
+        name: 'filliere',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+     {
+        path: '/profil',
+        component: profil,
+        name: 'profil',
+         beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
+    },
+
+    {
+        path: '/condidacies-accepted',
+        component: condidaciesAccepted,
+        name: 'condidaciesAccepted',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'user') next({name: 'dashUser'})
+            else next()
+          }
+    },
+    {
+        path: '/condidacies-rejected',
+        component: condidaciesRejected,
+        name: 'condidaciesRejected',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'user') next({name: 'dashUser'})
+            else next()
+          }
+    },
+    
+    
     {
         path: '/',
-        component:index,
-        name:'index',
+        component: index,
+        name: 'index',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (isAuthenticated && role==='admin') next({ name: 'condidacies' })
+            else  if (isAuthenticated && role==='user') next({ name: 'dashUser' })
+            else next()
+          }
 
     },
     {
         path: '/sign-in-user',
-        component:SignInUser,
-        name:'SignInUser',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
-            }).catch(()=>{
-                next()
-            })
+        component: SignInUser,
+        name: 'SignInUser',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (isAuthenticated && role ==='admin') next({ name: 'condidacies' })
+            if (isAuthenticated && role ==='user') next({ name: 'dashUser' })
+            else next()
           }
     },
     {
         path: '/sign-up',
-        component:SignUp,
-        name:'SignUp',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-               return next({name:'myaccount'})
-            }).catch(()=>{
-                next()
-            })
-        }
+        component: SignUp,
+        name: 'SignUp',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (isAuthenticated && role ==='admin') next({ name: 'condidacies' })
+            if (isAuthenticated && role ==='user') next({ name: 'dashUser' })
+            else next()
+          }
     },
 
     {
-        path:'/confirmation-email',
-        component:confirmationEmail,
-        name:'confirmationEmail'
+        path: '/dashUser',
+        component: dashUser,
+        name: 'dashUser',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (to.name !== 'SignInUser' && !isAuthenticated) next({ name: 'SignInUser' })
+            else if(role === 'admin') next({name: 'condidacies'})
+            else next()
+          }
     },
     {
-        path:'/dashUser',
-        component:dashUser,
-        name:'dashUser',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                next()
-            }).catch(()=>{
-                return next({name:'SignInUser'})
-            })
-        }
-    },
-    {
-        path:'/reset-password',
-        component:resetPassword,
-        name:'resetPassword'
-    },
-
-    {
-
-        path:'/confirm-email',
-        component:confirmemail,
-        name:'confirmemail'
+        path: '/reset-password',
+        component: resetPassword,
+        name: 'resetPassword',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (isAuthenticated && role ==='admin') next({ name: 'condidacies' })
+            if (isAuthenticated && role ==='user') next({ name: 'dashUser' })
+            else next()
+          }
     },
 
     {
 
-        path:'/dash-admin',
-        component:dashAdmin,
-        name:'dashAdmin',
-        beforeEnter: (to, from, next) =>{
-            axios.get('/api/athentificated').then(()=>{
-                next()
-            }).catch(()=>{
-                return next({name:'SignInUser'})
-            })
-        }
+        path: '/confirm-email',
+        component: confirmemail,
+        name: 'confirmemail',
+        beforeEnter: (to, from, next) => {
+            const isAuthenticated = store.getters.isLoggedIn;
+            const role =  localStorage.getItem('role');
+            if (isAuthenticated && role ==='admin') next({ name: 'condidacies' })
+            if (isAuthenticated && role ==='user') next({ name: 'dashUser' })
+            else next()
+          }
     },
-
-
-
 
 
 
 ]
 
 export default new Router({
-    mode:'history',
+    mode: 'history',
     routes
 })

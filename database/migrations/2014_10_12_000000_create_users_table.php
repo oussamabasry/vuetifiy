@@ -19,32 +19,44 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
 
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phonenumber');
-            $table->string('CNE');
-            $table->date('datebirth');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('sexe');
             $table->enum('role', ['user','admin'])->default('user');
+            $table->integer('completed');
             $table->rememberToken();
             $table->timestamps();
+            
         });
 
 
         DB::table('users')->insert([
-            'firstname' => 'ADMIN',
-            'lastname' => 'Mohamed',
-            'phonenumber' => '0648342583',
-            'CNE' => 'R145637383',
-            'datebirth' => '1999-06-23',
-            'email' => 'admin@admin.net',
+            //'firstname' => 'ADMIN',
+            //'lastname' => 'Mohamed',
+            //'phonenumber' => '0648342583',
+            //'CNE' => 'R145637383',
+            //'datebirth' => '1999-06-23',
+            'email' => 'admin@admin.com',
             'email_verified_at' => '2020-10-16 11:44:16',
             'password' => Hash::make('admin'),
-            'sexe' => 'Homme',
-            'role' => 'admin'
+            //'sexe' => 'Homme',
+            'role' => 'admin',
+            'completed'=>0,
+        ]);
+
+        DB::table('users')->insert([
+            //'firstname' => 'ADMIN',
+            //'lastname' => 'Mohamed',
+            //'phonenumber' => '0648342583',
+            //'CNE' => 'R145637383',
+            //'datebirth' => '1999-06-23',
+            'email' => 'user@user.com',
+            'email_verified_at' => '2020-10-16 11:44:16',
+            'password' => Hash::make('user'),
+            //'sexe' => 'Homme',
+            'role' => 'user',
+            'completed'=>0,
+            
         ]);
     }
 
