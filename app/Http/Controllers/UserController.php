@@ -27,11 +27,12 @@ class UserController extends Controller
               'grade_s1' => $request->note_S1,
               'grade_s2' => $request->note_S2,
               'grade_s3' => $request->note_S3,
-               'grade_s4' => $request->note_S4, 
-               'note' => $note,
+              'grade_s4' => $request->note_S4, 
+              'diploma' => $request->diplome, 
               'année_bac' => $request->annee_bac,
               'filliere' => $request->filliere,
               'année_bac2' => $request->annee_bac2,
+              'note' => $note
               ]);
 
               
@@ -170,7 +171,10 @@ class UserController extends Controller
      */
      public function index()
      {
-         $condidacies = DB::select('select * from user_profils');
+        $id = Auth::id(); 
+        
+         $condidacies = DB::select('SELECT * FROM `user_profils` WHERE user_id='.$id.' ');
+        
          return response()->json($condidacies);
      }
      public function savefile(Request $request)
@@ -390,7 +394,8 @@ class UserController extends Controller
             // 'datebirth' => request('datebirth'),
             'password' => Hash::make(request('password')),
             //'sexe' => request('sexe'),
-            'role' => request('role')
+            'role' => request('role'),
+            'completed' => 0,
         ]);
 
      
@@ -418,7 +423,7 @@ class UserController extends Controller
         $userProfil->grade_s3 = 0;
         $userProfil->grade_s4 = 0;
         
-        $userProfil->completed = 0;
+        
 
         $userProfil->CV = '';
         $userProfil->filliere = '';
