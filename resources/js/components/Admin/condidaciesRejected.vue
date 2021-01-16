@@ -107,7 +107,7 @@
 
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ item.diploma }}, {{ item.specialty_bac2 }}
+                  {{ item.diploma }}, {{ item.filliere }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>

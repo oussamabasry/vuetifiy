@@ -20,7 +20,7 @@ class CreateCondidaciesTable extends Migration
             //       ->references('id')
             //       ->on('users')  
             //       ->onDelete('cascade');
-            $table->unsignedBigInteger('user_profil_id');
+            $table->unsignedBigInteger('user_profil_id')->index();
             $table->foreign('user_profil_id')
                   ->references('id')
                   ->on('users')  

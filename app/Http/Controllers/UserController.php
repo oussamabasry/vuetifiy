@@ -60,11 +60,10 @@ class UserController extends Controller
     public function glsid(Request $request)
     {
         $id = request('id');
-
         $user_profil = UserProfil::select("id")
         ->where("user_id", $id)
         ->first();
-
+        
         DB::table('condidacies')->insert([
             ['user_profil_id' => $user_profil->id,
              'branch' => 'GLSID ',

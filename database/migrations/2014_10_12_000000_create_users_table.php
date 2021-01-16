@@ -40,7 +40,8 @@ class CreateUsersTable extends Migration
             'email_verified_at' => '2020-10-16 11:44:16',
             'password' => Hash::make('admin'),
             //'sexe' => 'Homme',
-            'role' => 'admin'
+            'role' => 'admin',
+            'completed'=>0,
         ]);
 
         DB::table('users')->insert([
@@ -54,6 +55,7 @@ class CreateUsersTable extends Migration
             'password' => Hash::make('user'),
             //'sexe' => 'Homme',
             'role' => 'user',
+            'completed'=>0,
             
         ]);
     }

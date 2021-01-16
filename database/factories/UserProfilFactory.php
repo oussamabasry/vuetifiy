@@ -29,7 +29,17 @@ $factory->define(UserProfil::class, function (Faker $faker) {
         'grade_s3' => $grade_s3,
         'grade_s4' => $grade_s4,
         'note' => ($grade_s1+$grade_s2+$grade_s3+$grade_s4)/4,
-        'specialty_bac2' => $faker->randomElement(['SMP','SMI','SMA','MIP','MATHS','GI','GM','GE']),
+        'filliere' => $faker->randomElement(['SMP','SMI','SMA','MIP','MATHS','GI','GM','GE']),
         'user_id' => 0,
+        'CV' => '',
+        'année_bac' => 0,
+        'année_bac2' => 0,
+        'Photo' => '',
+        'CNI_Recto' => '',
+        'CNI_Verso' => '',
+        'Relevet_S1' => '',
+        'Relevet_S2' => '',
+        'Relevet_S3' => '',
+        'Relevet_S4' => ''
     ];
 });
