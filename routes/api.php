@@ -51,7 +51,6 @@ Route::post('/storage/app/r3','UserController@saver3');
 Route::post('/storage/app/r4','UserController@saver4');
 Route::post('/storage/app/dp','UserController@savedp');
 Route::post('/register','UserController@register');
-Route::post('/sign-in-user','UserController@login');
 Route::post('/forgot','ForgotController@forgot');
 Route::post('/reset','ForgotController@reset');
 Route::post('/send-email-confirm','ConfirmemailController@SendEmailConfirm');

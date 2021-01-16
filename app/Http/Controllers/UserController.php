@@ -13,41 +13,7 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
-
-        $user = DB::table('users')->where('email', $request->email)->first();
-
-        try {
-            if ($user->email_verified_at != null && $user->role == 'user') {
-
-                if (Auth::attempt($request->only('email', 'password'))) {
-                    return response()->json(Auth::user(), 300);
-                }
-            } elseif ($user->email_verified_at != null && $user->role == 'admin') {
-
-                if (Auth::attempt($request->only('email', 'password'))) {
-                    return response()->json(Auth::user(), 201);
-                }
-            } elseif ($user->email_verified_at == null) {
-                return response([
-                    'message' => 'you must confirm your email'
-                ], 403);
-            }
-        } catch (\Exception $exception) {
-            return response([
-                'message' => $exception->getMessage()
-            ], 400);
-        }
-
-        return response([
-            'message' => 'Invalid email or password'
-        ], 401);
-    }
+   
     public function store(Request $request)
     {
     
@@ -67,6 +33,8 @@ class UserController extends Controller
               'filliere' => $request->filliere,
               'année_bac2' => $request->annee_bac2,
               ]);
+
+              
         $user = auth()->user();
         $userCompleted = DB::table('users')
               ->where('id', $user->id)
