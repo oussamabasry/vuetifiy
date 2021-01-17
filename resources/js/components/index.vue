@@ -67,14 +67,14 @@
 
       <v-btn
         icon
-        @click="show = !show"
+        @click="showMath = !showMath"
       >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        <v-icon>{{ showMath ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
-      <div v-show="show">
+      <div v-show="showMath">
         <v-divider></v-divider>
 
         <v-card-text>
@@ -118,14 +118,14 @@
 
       <v-btn
         icon
-        @click="show = !show"
+        @click="showEle = !showEle"
       >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        <v-icon>{{ showEle ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
-      <div v-show="show">
+      <div v-show="showEle">
         <v-divider></v-divider>
 
         <v-card-text>
@@ -168,14 +168,14 @@
 
       <v-btn
         icon
-        @click="show = !show"
+        @click="showMeca = !showMeca"
       >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        <v-icon>{{ showMeca ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
-      <div v-show="show">
+      <div v-show="showMeca">
         <v-divider></v-divider>
 
         <v-card-text>
@@ -209,7 +209,9 @@
         ],
         slides: ["/images/3.png","/images/4.jpg","/images/1.png",],
         
-      show: false,
+       showMath: false,
+       showEle: false,
+       showMeca: false,
     
       }
     },
